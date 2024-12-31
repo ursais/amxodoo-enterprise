@@ -40,7 +40,7 @@ repos:
       # update the NOT INSTALLABLE ADDONS section above
       - id: oca-update-pre-commit-excluded-addons
       - id: oca-fix-manifest-website
-        args: ["https://github.com/OCA/l10n-mexico"]
+        args: ["https://github.com/amxodoo/enterprise"]
       - id: oca-gen-addon-readme
         args:
           - --addons-dir=.
@@ -132,12 +132,6 @@ repos:
           - requirements.txt
           - --header
           - "# generated from manifests external_dependencies"
-  - repo: https://github.com/PyCQA/flake8
-    rev: 3.9.2
-    hooks:
-      - id: flake8
-        name: flake8
-        additional_dependencies: ["flake8-bugbear==21.9.2"]
   - repo: https://github.com/OCA/pylint-odoo
     rev: v8.0.19
     hooks:
