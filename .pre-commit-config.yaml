@@ -15,7 +15,9 @@ exclude: |
   # Don't bother non-technical authors with formatting issues in docs
   readme/.*\.(rst|md)$|
   # You don't usually want a bot to modify your legal texts
-  (LICENSE.*|COPYING.*)
+  (LICENSE.*|COPYING.*)|
+  # Skip unexpected character ü in "Antigüedad"
+  l10n_mx_hr_payroll_edi/data/1.2/cfdi.xml
 default_language_version:
   python: python3
   node: "16.17.0"
