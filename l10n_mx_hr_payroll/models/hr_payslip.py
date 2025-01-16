@@ -505,7 +505,14 @@ class HrPayslip(models.Model):
 
     def send_by_email(self):
         # OVERRIDE
-        return super().send_by_email()
+        template = self.env.ref(
+            "hr_payroll.mail_template_new_payslip", raise_if_not_found=False
+        )
+        for record in self:
+            if template:
+                template.send_mail(
+                    record.id, email_layout_xmlid="mail.mail_notification_light"
+                )
 
     def _get_base_local_dict(self):
         return {"float_round": float_round}
