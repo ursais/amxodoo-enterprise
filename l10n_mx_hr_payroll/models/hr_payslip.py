@@ -508,8 +508,8 @@ class HrPayslip(models.Model):
         template = self.env.ref(
             "hr_payroll.mail_template_new_payslip", raise_if_not_found=False
         )
-        for record in self:
-            if template:
+        if template:
+            for record in self:
                 template.send_mail(
                     record.id, email_layout_xmlid="mail.mail_notification_light"
                 )
