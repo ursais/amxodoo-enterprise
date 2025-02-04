@@ -96,16 +96,13 @@ class HrPayslip(models.Model):
     )
 
     def action_payslip_done(self):
-        if self.journal_id.edi_format_ids.code != "cfdi_1_2":
-            return super().action_payslip_done()
+        super().action_payslip_done()
         if any(slip.state == "cancel" for slip in self):
             raise ValidationError(_("You can't validate a cancelled payslip."))
-
         payslip_run_id = self.mapped("payslip_run_id")
         self._action_create_account_move()
         self.write({"state": "done"})
         payslip_run_id.action_close()
-
         self._action_create_account_move()
         return
 

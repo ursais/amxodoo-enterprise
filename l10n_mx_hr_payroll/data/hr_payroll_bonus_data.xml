@@ -13,10 +13,6 @@
     <record id="structure_mx_bonus" model="hr.payroll.structure">
         <field name="name">Mexican Bonus Structure</field>
         <field name="type_id" ref="l10n_mx_hr_payroll.structure_type_bonus_mx" />
-        <field
-            name="journal_id"
-            ref="l10n_mx_hr_payroll.hr_salaries_mx_account_journal"
-        />
         <field name="type_use">bonus</field>
         <field name="schedule_pay">annually</field>
         <field name="country_id" ref="base.mx" />

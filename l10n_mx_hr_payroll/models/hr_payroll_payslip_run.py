@@ -33,14 +33,13 @@ class HrPayslipRun(models.Model):
         return
 
     def action_validate(self):
-        # OVERRIDE
-        if self.structure_id.journal_id.edi_format_ids.code != "cfdi_1_2":
-            return super(HrPayslipRun, self).action_validate()
+        res = super().action_validate()
         self.mapped("slip_ids").filtered(
             lambda slip: slip.state != "cancel"
         ).action_payslip_done()
         self.action_close()
         self.payroll_period_line_id.state = "closed"
+        return res
 
     def action_stamp_payroll_pac(self):
         self.mapped("slip_ids").filtered(

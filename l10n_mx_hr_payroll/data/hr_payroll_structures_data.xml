@@ -61,10 +61,6 @@
             name="type_id"
             ref="l10n_mx_hr_payroll.structure_type_employee_weekly_mx"
         />
-        <field
-            name="journal_id"
-            ref="l10n_mx_hr_payroll.hr_salaries_mx_account_journal"
-        />
         <field name="schedule_pay">weekly</field>
         <field name="country_id" ref="base.mx" />
     </record>
@@ -74,10 +70,6 @@
         <field
             name="type_id"
             ref="l10n_mx_hr_payroll.structure_type_employee_weekly_special_mx"
-        />
-        <field
-            name="journal_id"
-            ref="l10n_mx_hr_payroll.hr_salaries_mx_account_journal"
         />
         <field name="use_worked_day_lines">True</field>
         <field name="schedule_pay">weekly</field>
@@ -92,10 +84,6 @@
             name="type_id"
             ref="l10n_mx_hr_payroll.structure_type_employee_biweekly_mx"
         />
-        <field
-            name="journal_id"
-            ref="l10n_mx_hr_payroll.hr_salaries_mx_account_journal"
-        />
         <field name="schedule_pay">bi-weekly</field>
         <field name="country_id" ref="base.mx" />
     </record>
@@ -105,10 +93,6 @@
         <field
             name="type_id"
             ref="l10n_mx_hr_payroll.structure_type_employee_biweekly_special_mx"
-        />
-        <field
-            name="journal_id"
-            ref="l10n_mx_hr_payroll.hr_salaries_mx_account_journal"
         />
         <field name="use_worked_day_lines">True</field>
         <field name="schedule_pay">bi-weekly</field>
@@ -123,10 +107,6 @@
             name="type_id"
             ref="l10n_mx_hr_payroll.structure_type_employee_monthly_mx"
         />
-        <field
-            name="journal_id"
-            ref="l10n_mx_hr_payroll.hr_salaries_mx_account_journal"
-        />
         <field name="schedule_pay">monthly</field>
         <field name="country_id" ref="base.mx" />
     </record>
@@ -136,10 +116,6 @@
         <field
             name="type_id"
             ref="l10n_mx_hr_payroll.structure_type_employee_monthly_special_mx"
-        />
-        <field
-            name="journal_id"
-            ref="l10n_mx_hr_payroll.hr_salaries_mx_account_journal"
         />
         <field name="use_worked_day_lines">True</field>
         <field name="schedule_pay">monthly</field>

@@ -9,7 +9,6 @@
     "category": "Human Resources/Payroll",
     "version": "16.0.1.0.0",
     "depends": [
-        "base",
         "l10n_mx",
         "contacts",
         "account_reports",
