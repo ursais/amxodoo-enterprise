@@ -45,7 +45,7 @@
                             <field name="date_apply" />
                             <field
                                 name="employee_id"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                             <field name="contract_id" readonly="1" />
                             <field
@@ -65,7 +65,7 @@
                             <field name="salary_type" readonly="1" />
                         </group>
                     </group>
-                    <group attrs="{'invisible':[('contract_id','=', False)]}">
+                    <group invisible="contract_id == False">
                         <group string="Current Salary">
                             <label for="c_date" string="Date" />
                             <field name="c_date" nolabel="1" readonly="1" />
@@ -98,7 +98,7 @@
                         <field
                             name="notes"
                             nolabel="1"
-                            attrs="{'readonly':[('state','!=','draft')]}"
+                            readonly="state != 'draft'"
                         />
                     </group>
                 </sheet>
@@ -204,7 +204,7 @@
                             icon="fa-book"
                             type="object"
                             help="Wage Increase movements"
-                            attrs="{'invisible': [('movs_count', '=', 0)]}"
+                            invisible="movs_count == 0"
                         >
                             <div class="o_field_widget o_stat_info">
                                 <span class="o_stat_value"><field
@@ -229,16 +229,16 @@
                             <field name="date_start" />
                             <field
                                 name="current_date"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                             <field name="increase_type" />
                             <field
                                 name="amount"
-                                attrs="{'invisible':[('increase_type','!=','amount')]}"
+                                invisible="increase_type != amount"
                             />
                             <field
                                 name="percent"
-                                attrs="{'invisible':[('increase_type','!=','percent')]}"
+                                invisible="increase_type != percent"
                             />
                             <field
                                 name="company_id"
@@ -263,7 +263,7 @@
                                 <field
                                     name="notes"
                                     nolabel="1"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    readonly="state != 'draft'"
                                 />
                             </group>
                         </page>

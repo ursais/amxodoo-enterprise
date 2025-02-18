@@ -98,7 +98,7 @@
                                 name="payment_ids"
                                 nolabel="1"
                                 create="0"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             >
                                 <tree>
                                     <field name="date" />
@@ -136,7 +136,7 @@
                 <field name="date_end" />
                 <field name="loan_type_mx" />
                 <field name="total_amount" />
-                <field name="total_paid" invisible="1" />
+                <field name="total_paid" column_invisible="1" />
                 <field name="amount" />
                 <field
                     name="state"

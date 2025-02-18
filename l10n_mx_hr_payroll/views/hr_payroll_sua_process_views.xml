@@ -50,7 +50,7 @@
                             icon="fa-book"
                             type="object"
                             help="Sua movements"
-                            attrs="{'invisible': [('movs_count', '=', 0)]}"
+                            invisible="movs_count == 0"
                         >
                             <div class="o_field_widget o_stat_info">
                                 <span class="o_stat_value"><field
@@ -69,7 +69,7 @@
                             <field name="report_type" />
                             <field
                                 name="movt_type"
-                                attrs="{'invisible':[('report_type','!=','movt')]}"
+                                invisible="report_type != 'movt'"
                             />
                         </group>
                         <group>
@@ -78,17 +78,17 @@
                                 <field
                                     name="date_start"
                                     class="oe_inline"
-                                    attrs="{'readonly':[('state','=','done')]}"
+                                    readonly="state == 'done'"
                                 /> - <field
                                     name="date_end"
                                     class="oe_inline"
-                                    attrs="{'readonly':[('state','=','done')]}"
+                                    readonly="state == 'done'"
                                 />
                             </span>
                             <field
                                 name="company_id"
                                 groups="base.group_multi_company"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                         </group>
                     </group>
@@ -106,7 +106,7 @@
                             <field
                                 name="notes"
                                 nolabel="1"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                         </page>
                     </notebook>

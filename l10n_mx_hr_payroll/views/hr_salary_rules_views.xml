@@ -26,25 +26,25 @@
                                     name="allowance_type_l10n_mx"
                                     nolabel="1"
                                     colspan="4"
-                                    attrs="{'invisible':[('category_code','not in',['BASIC','ALW','ALW2'])]}"
+                                    ainvisible="category_code not in ['BASIC','ALW','ALW2']"
                                 />
                                 <field
                                     name="deduction_type_l10n_mx"
                                     nolabel="1"
                                     colspan="4"
-                                    attrs="{'invisible':[('category_code','not in',['DED', 'OTDED'])]}"
+                                    invisible="category_code not in ['DED', 'OTDED']"
                                 />
                                 <field
                                     name="otherpayment_type_l10n_mx"
                                     nolabel="1"
                                     colspan="4"
-                                    attrs="{'invisible':[('category_code','not in',['OTPAY'])]}"
+                                    invisible="category_code not in ['OTPAY']"
                                 />
                             </div>
                         </group>
                         <group
                             string="Payment Method"
-                            attrs="{'invisible':[('category_code','not in',['BASIC','ALW','ALW2'])]}"
+                            ainvisible="category_code not in ['BASIC','ALW','ALW2']"
                         >
                             <div>
                                 <field
@@ -55,17 +55,17 @@
                                 />
                                 <field
                                     name="cuenta_especie"
-                                    attrs="{'invisible':[('payment_method_l10n_mx','in','001')]}"
+                                    invisible="payment_method_l10n_mx in ['001']"
                                 />
                                 <field
                                     name="fondo_ahorro_aux"
-                                    attrs="{'invisible':[('category_code','not in',['AUX'])]}"
+                                    invisible="category_code not in ['AUX']"
                                 />
                             </div>
                         </group>
                         <group
                             string="ISR Exemption"
-                            attrs="{'invisible':[('category_code','not in',['BASIC','ALW','ALW2'])]}"
+                            ainvisible="category_code not in ['BASIC','ALW','ALW2']"
                         >
                             <div>
                                 <field name="exemption" />
@@ -73,36 +73,36 @@
                             </div>
                                 <field
                                 name="exempt_part"
-                                attrs="{'invisible':[('exemption','=',False)]}"
+                                invisible="exemption == False"
                             />
                                 <field
                                 name="taxable_part"
-                                attrs="{'invisible':[('exemption','=',False)]}"
+                                invisible="exemption == False"
                             />
                                 <field
                                 name="integer_income"
-                                attrs="{'invisible':[('exemption','=',False)]}"
+                                invisible="exemption == False"
                             />
                         </group>
                         <group
                             string="IMSS Variable Perception"
-                            attrs="{'invisible':[('category_code','not in',['BASIC','ALW','ALW2'])]}"
+                            ainvisible="category_code not in ['BASIC','ALW','ALW2']"
                         >
                             <div>
                                 <field name="variable_imss" />
                             </div>
                             <field
                                 name="type_variable_imss"
-                                attrs="{'invisible':[('variable_imss','=',False)]}"
+                                invisible="variable_imss == False"
                             />
                             <field
                                 name="amount_variable_imss"
-                                attrs="{'invisible':[('variable_imss','=',False)]}"
+                                invisible="variable_imss == False"
                             />
                         </group>
                         <group
                             string="Others"
-                            attrs="{'invisible':[('category_code','not in',['BASIC','ALW','ALW2'])]}"
+                            ainvisible="category_code not in ['BASIC','ALW','ALW2']"
                         >
                             <div>
                                 <field name="integer_ptu" />

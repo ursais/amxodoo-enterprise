@@ -63,7 +63,7 @@
                             type="object"
                             class="oe_stat_button"
                             icon="fa-pencil-square-o"
-                            attrs="{'invisible': [('payslip_id', '=', True)]}"
+                            invisible="payslip_id == True"
                         >
                             <div class="o_field_widget o_stat_info">
                                 <span class="o_stat_text">Payslip</span>
@@ -78,7 +78,7 @@
                         <group>
                             <field
                                 name="employee_id"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                             <field name="currency_id" invisible="1" />
                             <field name="wage" />
@@ -89,7 +89,7 @@
                             <field
                                 name="contract_id"
                                 domain="[('employee_id', '=', employee_id)]"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                             <label for="cdate_start" string="Period" />
                             <div class="o_row">
@@ -105,7 +105,7 @@
                             <field
                                 name="company_id"
                                 groups="base.group_multi_company"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                         </group>
                     </group>
@@ -146,7 +146,7 @@
                         <field
                             name="notes"
                             nolabel="1"
-                            attrs="{'readonly':[('state','!=','draft')]}"
+                            readonly="state != 'draft'"
                         />
                     </group>
                 </sheet>

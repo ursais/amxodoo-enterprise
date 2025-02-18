@@ -20,20 +20,20 @@
                             <field name="date_applied" />
                             <field
                                 name="employee_id"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                             <field
                                 name="contract_id"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                             <field
                                 name="company_id"
                                 groups="base.group_multi_company"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                         </group>
                     </group>
-                    <group attrs="{'invisible':[('contract_id','=', False)]}">
+                    <group invisible="contract_id == False">
                         <group string="Older Salary">
                             <label for="older_wage" string="Wage" />
                             <div class="o_row" name="c_wage">
@@ -76,7 +76,7 @@
         <field name="model">hr.contract.salary_history</field>
         <field name="arch" type="xml">
             <tree sample="1">
-                <field name="name" invisible="1" />
+                <field name="name" column_invisible="1" />
                 <field name="date" />
                 <field name="date_applied" />
                 <field name="employee_id" />

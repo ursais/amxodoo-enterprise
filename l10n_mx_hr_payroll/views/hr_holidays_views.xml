@@ -10,11 +10,9 @@
             <xpath expr="//field[@name='holiday_status_id']" position="after">
                 <field
                     name="disability_folio"
-                    attrs="{
-                        'readonly': [('state', 'not in', ['draft', 'confirm'])],
-                        'invisible': [('is_disability', '==', False)],
-                        'required': [('is_disability', '==', True)]
-                    }"
+                    readonly="state not in ['draft', 'confirm']"
+                    invisible="is_disability == False"
+                    required="is_disability == True"
                 />
                 <field name="is_disability" />
             </xpath>

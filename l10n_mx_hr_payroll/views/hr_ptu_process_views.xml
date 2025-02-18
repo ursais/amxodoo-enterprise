@@ -43,7 +43,7 @@
                             icon="fa-book"
                             type="object"
                             help="Generated Payslips"
-                            attrs="{'invisible': [('payslip_count', '=', 0)]}"
+                            invisible="payslip_count == 0"
                         >
                             <div class="o_field_widget o_stat_info">
                                 <span class="o_stat_value"><field
@@ -77,7 +77,7 @@
                             <field
                                 name="note"
                                 nolabel="1"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                         </page>
                     </notebook>

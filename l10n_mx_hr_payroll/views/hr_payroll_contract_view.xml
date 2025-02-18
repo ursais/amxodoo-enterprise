@@ -10,7 +10,7 @@
                     class="oe_stat_button"
                     type="object"
                     name="action_view_salary_histories"
-                    attrs="{'invisible': [('salaries_history_count','=',0)]}"
+                    invisible="salaries_history_count == 0"
                     icon="fa-tasks"
                 >
                     <div class="o_field_widget o_stat_info">
@@ -173,11 +173,11 @@
                             <field name="current_wage" />
                             <field
                                 name="new_wage"
-                                attrs="{'invisible': [('process_type', '!=', 'renew')]}"
+                                invisible="process_type != 'renew'"
                             />
                             <field
                                 name="reason"
-                                attrs="{'invisible': [('process_type', '!=', 'terminate')]}"
+                                invisible="process_type != 'terminate'"
                             />
                         </group>
                     </group>
@@ -206,9 +206,9 @@
                 <field name="date" />
                 <field name="employee_id" />
                 <field name="company_id" groups="base.group_multi_company" />
-                <field name="process_type" invisible="0" />
+                <field name="process_type" column_invisible="0" />
                 <field name="state" />
-                <field name="active" invisible="1" />
+                <field name="active" column_invisible="1" />
             </tree>
         </field>
     </record>

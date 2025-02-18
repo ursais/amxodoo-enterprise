@@ -19,64 +19,62 @@
                     >
                         <field
                             name="name"
-                            attrs="{'invisible':[('hide_rule','=', True)]}"
+                            invisible="hide_rule == True"
                         />
                         <field
                             name="code"
                             readonly="1"
                             force_save="1"
-                            attrs="{'invisible':[('hide_rule','=', True)]}"
+                            invisible="hide_rule == True"
                         />
                         <field
                             name="category_id"
                             readonly="1"
                             force_save="1"
-                            attrs="{'invisible':[('hide_rule','=', True)]}"
+                            invisible="hide_rule == True"
                         />
                         <field
                             name="rule_type"
-                            invisible="0"
                             readonly="0"
                             force_save="1"
-                            attrs="{'invisible':[('hide_rule','=', True)]}"
+                            invisible="hide_rule == True"
                         />
-                        <field name="hide_rule" invisible="1" />
+                        <field name="hide_rule" column_invisible="1" />
                         <field
                             name="sequence"
-                            invisible="1"
                             readonly="1"
                             force_save="1"
-                            attrs="{'invisible':[('hide_rule','=', True)]}"
+                            invisible="hide_rule == True"
                         />
                         <field
                             name="quantity"
                             readonly="1"
                             force_save="1"
-                            attrs="{'invisible':[('hide_rule','=', True)]}"
+                            invisible="hide_rule == True"
                         />
                         <field
                             name="rate"
                             readonly="1"
                             force_save="1"
-                            attrs="{'invisible':[('hide_rule','=', True)]}"
+                            invisible="hide_rule == True"
                         />
                         <field
                             name="salary_rule_id"
                             readonly="1"
                             force_save="1"
-                            attrs="{'invisible':[('hide_rule','=', True)]}"
+                            invisible="hide_rule == True"
                         />
                         <field
                             name="amount"
                             readonly="1"
                             force_save="1"
-                            attrs="{'invisible':[('hide_rule','=', True)]}"
+                            invisible="hide_rule == True"
                         />
                         <field
                             name="total"
                             readonly="1"
                             force_save="1"
-                            attrs="{'invisible':[('hide_rule','=', True)]}"
+                            invisible="hide_rule == True"
                         />
                     </tree>
                     <form string="Payslip Line">
@@ -149,8 +147,7 @@
                     icon="fa-money"
                     type="object"
                     help="Analyse Payslip"
-                    attrs="{'invisible': [('extratime_count', '=', 10)]}"
-                    invisible="1"
+                    invisible="extratime_count == 10"
                 >
                     <div class="o_field_widget o_stat_info">
                         <span class="o_stat_value"><field

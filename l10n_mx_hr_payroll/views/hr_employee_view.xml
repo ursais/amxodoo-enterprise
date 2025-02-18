@@ -15,11 +15,11 @@
                     <field name="total_overtime" invisible="1" />
                     <field
                         name="firstname"
-                        attrs="{'required': [('lastname', '=', False)]}"
+                        required="lastname == False"
                     />
                     <field
                         name="lastname"
-                        attrs="{'required': [('firstname', '=', False)]}"
+                        required="firstname == False"
                     />
                     <field name="second_lastname" />
                 </group>

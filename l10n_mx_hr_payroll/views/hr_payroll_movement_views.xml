@@ -61,40 +61,40 @@
                         <group>
                             <field
                                 name="name"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                             <field
                                 name="employee_id"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                             <label for="date_start" string="Period" />
                             <span>
                                 <field
                                     name="date_start"
                                     class="oe_inline"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    readonly="state != 'draft'"
                                 /> - <field
                                     name="date_end"
                                     class="oe_inline"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    readonly="state != 'draft'"
                                 />
                             </span>
                             <field
                                 name="amount"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                         </group>
                         <group>
                             <field
                                 name="payslip_input_id"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                                 domain="[('input_type_mx', '=', 'movement')]"
                                 options="{'no_create': True, 'no_create_edit': True}"
                             />
                             <field
                                 name="company_id"
                                 groups="base.group_multi_company"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                         </group>
                     </group>
@@ -192,7 +192,7 @@
                             icon="fa-book"
                             type="object"
                             help="Generated Payslips"
-                            attrs="{'invisible': [('movements_count', '=', 0)]}"
+                            invisible="movements_count == 0"
                         >
                             <div class="o_field_widget o_stat_info">
                                 <span class="o_stat_value"><field
@@ -206,49 +206,49 @@
                         <group>
                             <field
                                 name="name"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                             <label for="date_start" string="Period" />
                             <span>
                                 <field
                                     name="date_start"
                                     class="oe_inline"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    readonly="state != 'draft'"
                                 /> - <field
                                     name="date_end"
                                     class="oe_inline"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    readonly="state != 'draft'"
                                 />
                             </span>
                             <field
                                 name="amount"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                         </group>
                         <group>
                             <field
                                 name="payslip_input_id"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                                 domain="[('input_type_mx', '=', 'movement')]"
                                 options="{'no_create': True, 'no_create_edit': True}"
                             />
                             <field
                                 name="company_id"
                                 groups="base.group_multi_company"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                         </group>
                     </group>
                     <notebook>
                         <page
                             string="Lines"
-                            attrs="{'readonly':[('state','!=','draft')]}"
+                            readonly="state != 'draft'"
                         >
                             <field
                                 name="line_ids"
                                 nolabel="1"
                                 create="0"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             >
                                 <tree>
                                     <field name="employee_id" />
@@ -271,7 +271,7 @@
                                 <field
                                     name="note"
                                     nolabel="1"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    readonly="state != 'draft'"
                                 />
                             </group>
                         </page>

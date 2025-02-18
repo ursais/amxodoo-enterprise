@@ -6,16 +6,14 @@
         <field name="inherit_id" ref="hr_payroll.res_config_settings_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//div[@id='hr_payroll_accountant']" position="after">
-                <h2>Mexican Payroll</h2>
-                <div class="row mt16 o_settings_container" id="hr_payroll_mx_settings">
-                    <div
-                        class="col-12 col-lg-6 o_setting_box"
+                <block class="row mt16" id="hr_payroll_mx_settings" title="Mexican Payroll">
+                    <setting
+                        class="col-12 col-lg-6"
                         id="hr_reporting_setting"
                         title="Payroll of employees report"
                     >
-                        <div class="o_setting_left_pane">
-                        </div>
-                        <div class="o_setting_right_pane">
+                        <div />
+                        <div>
                             <span class="o_form_label">Global Amount</span>
                             <div class="text-muted">
                                 Configure Global Amount
@@ -44,13 +42,13 @@
                                 <field name="hr_payroll_umi_l10n_mx" />
                             </div>
                         </div>
-                    </div>
-                    <div
-                        class="col-12 col-lg-6 o_setting_box"
+                    </setting>
+                    <setting
+                        class="col-12 col-lg-6"
                         id="payroll_email_setting"
                     >
-                        <div class="o_setting_left_pane" />
-                        <div class="o_setting_right_pane">
+                        <div />
+                        <div>
                             <span class="o_form_label">Configuration for e-mail</span>
                             <div class="text-muted">
                                 Select an email for the payroll, Your employee will
@@ -73,13 +71,13 @@
                                 <field name="hr_payroll_email_template" />
                             </div>
                         </div>
-                    </div>
-                    <div
-                        class="col-12 col-lg-6 o_setting_box"
+                    </setting>
+                    <setting
+                        class="col-12 col-lg-6"
                         id="payroll_settlement_setting"
                     >
-                        <div class="o_setting_left_pane" />
-                        <div class="o_setting_right_pane">
+                        <div />
+                        <div>
                             <span class="o_form_label">Settlement configuration</span>
                             <div class="text-muted">
                             </div>
@@ -93,17 +91,16 @@
                             </div>
                             <div />
                         </div>
-                    </div>
-                </div>
+                    </setting>
+                </block>
             </xpath>
 
             <xpath expr="//div[@id='companies']" position='after'>
-                <h2>Employee Names Order</h2>
-                <div class="row mt16 o_settings_container" name="employee_names_order">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_right_pane" />
-                    </div>
-                </div>
+                <block class="row mt16" name="employee_names_order" title="Employee Names Order">
+                    <setting class="col-xs-12 col-md-6">
+                        <div />
+                    </setting>
+                </block>
             </xpath>
 
         </field>

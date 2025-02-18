@@ -7,7 +7,7 @@
     "Odoo Mexican Association (AMOdoo)",
     "website": "https://github.com/amxodoo/enterprise",
     "category": "Human Resources/Payroll",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "depends": [
         "base",
         "l10n_mx",
