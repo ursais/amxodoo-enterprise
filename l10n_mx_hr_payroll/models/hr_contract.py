@@ -71,7 +71,6 @@ class HrContract(models.Model):
 
     @api.depends("date_start", "first_contract_date")
     def _compute_antiquity(self):
-
         for contract in self:
             if contract.first_contract_date:
                 days = (fields.Date.today() - contract.first_contract_date).days

@@ -45,7 +45,6 @@ class ReportL10nMxHrPayrollReportIdse(models.AbstractModel):
 
     def _get_salary_type_idse_baja(self, contract_ids, options):
         for record in contract_ids:
-
             if record.salary_type == "01":
                 if not options.get("update_salaries_txt", False):
                     return "Fijo"
@@ -71,7 +70,6 @@ class ReportL10nMxHrPayrollReportIdse(models.AbstractModel):
 
     def _get_journal_type_idse_baja(self, contract_ids, options):
         for record in contract_ids:
-
             if record.journal_type == "00":
                 if not options.get("update_salaries_txt", False):
                     return "Normal"
@@ -126,7 +124,7 @@ class ReportL10nMxHrPayrollReportIdse(models.AbstractModel):
                 reg_date = (record.date_start).strftime("%d-%m-%Y")
 
             sbc = 0
-            sbc = (str("{:4.2f}".format(record.sdi)).replace(".", "")).zfill(6)
+            sbc = (str(f"{record.sdi:4.2f}").replace(".", "")).zfill(6)
 
             if options.get("update_salaries_txt", False):
                 columns = [
@@ -149,7 +147,7 @@ class ReportL10nMxHrPayrollReportIdse(models.AbstractModel):
                 columns = [
                     record.employee_id.employer_register.name,
                     record.employee_id.ssnid,
-                    "{:10.2f}".format(record.sdi),
+                    f"{record.sdi:10.2f}",
                     contract_type,
                     salary_type,
                     journal_type,

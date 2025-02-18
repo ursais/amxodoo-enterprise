@@ -215,7 +215,7 @@ class HrPayslipEmployees(models.TransientModel):
                     "contract_id": contract.id,
                     "struct_id": self.structure_id.id
                     or contract.structure_type_id.default_struct_id.id,
-                }
+                },
             )
             payslips_vals.append(values)
         payslips = Payslip.with_context(tracking_disable=True).create(payslips_vals)
@@ -289,7 +289,7 @@ class HrMovementEmployees(models.TransientModel):
                     "multi_form": True,
                     "amount": movement_employee.amount,
                     "line_id": movement_employee.id,
-                }
+                },
             )
             for employee in self.employee_ids
         ]
