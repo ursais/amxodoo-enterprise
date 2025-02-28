@@ -72,18 +72,18 @@ class HrPayrollExtraTime(models.Model):
 
     @api.model_create_multi
     def create(self, vals):
-        result = super(HrPayrollExtraTime, self).create(vals)
+        result = super().create(vals)
         return result
 
     def write(self, vals):
-        write_result = super(HrPayrollExtraTime, self).write(vals)
+        write_result = super().write(vals)
         return write_result
 
     def unlink(self):
         for move in self:
             if move.state != "draft":
                 raise UserError(_("You can not delete this move."))
-        return super(HrPayrollExtraTime, self).unlink()
+        return super().unlink()
 
     def str_to_datetime(self, dt_str, tz=tzmx):
         return tz.localize(fields.Datetime.from_string(dt_str))

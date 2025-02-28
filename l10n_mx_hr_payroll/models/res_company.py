@@ -30,7 +30,7 @@ class ResCompany(models.Model):
         url = "http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina12.xsd"
         xml_ids = self.env["ir.model.data"].search([("name", "like", "xsd_cached_%")])
         _logger.info("xml_ids", xml_ids)
-        xsd_files = ["%s.%s" % (x.module, x.name) for x in xml_ids]
+        xsd_files = [f"{x.module}.{x.name}" for x in xml_ids]
         _logger.info("xsd_files", xsd_files)
         for xsd in xsd_files:
             self.env.ref(xsd).unlink()

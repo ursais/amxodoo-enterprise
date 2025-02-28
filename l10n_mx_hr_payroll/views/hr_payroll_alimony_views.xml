@@ -63,18 +63,9 @@
                     </div>
                     <group>
                         <group>
-                            <field
-                                name="employee_id"
-                                readonly="state != 'draft'"
-                            />
-                            <field
-                                name="beneficiary"
-                                readonly="state != 'draft'"
-                            />
-                            <field
-                                name="payment_method"
-                                readonly="state != 'draft'"
-                            />
+                            <field name="employee_id" readonly="state != 'draft'" />
+                            <field name="beneficiary" readonly="state != 'draft'" />
+                            <field name="payment_method" readonly="state != 'draft'" />
                             <field
                                 name="amount_anual_increase"
                                 invisible="1"
@@ -93,18 +84,9 @@
                             />
                         </group>
                         <group>
-                            <field
-                                name="proceeding"
-                                readonly="state != 'draft'"
-                            />
-                            <field
-                                name="folio"
-                                readonly="state != 'draft'"
-                            />
-                            <field
-                                name="amount_type"
-                                readonly="state != 'draft'"
-                            />
+                            <field name="proceeding" readonly="state != 'draft'" />
+                            <field name="folio" readonly="state != 'draft'" />
+                            <field name="amount_type" readonly="state != 'draft'" />
                             <label for="amount" string="Discount / Percent" />
                             <span>
                                 <label
@@ -183,10 +165,7 @@
                 <field name="name" />
                 <field name="employee_id" />
                 <field name="beneficiary" />
-                <field
-                    name="amount_type"
-                    readonly="state != 'draft'"
-                />
+                <field name="amount_type" readonly="state != 'draft'" />
                 <field name="amount" string="Amount" />
                 <field
                     name="state"

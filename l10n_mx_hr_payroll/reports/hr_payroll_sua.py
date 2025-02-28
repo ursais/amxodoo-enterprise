@@ -69,7 +69,7 @@ class HrPayrollSUAReport(models.AbstractModel):
         return _("IDSE (Reingresos)")
 
     def _get_reports_buttons(self):
-        buttons = super(HrPayrollSUAReport, self)._get_reports_buttons()
+        buttons = super()._get_reports_buttons()
         buttons += [
             {
                 "name": _("Export IMSS (TXT)"),

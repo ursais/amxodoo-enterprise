@@ -14,7 +14,7 @@ class HrGeneralSalaryIncreaseEmployees(models.TransientModel):
     def default_get(self, fields):
         """Allow support of active_id / active_model instead of jut default_lead_id
         to ease window action definitions, and be backward compatible."""
-        return super(HrGeneralSalaryIncreaseEmployees, self).default_get(fields)
+        return super().default_get(fields)
 
     def _get_available_contracts_domain(self):
         move_id = self.env.context.get("active_id")

@@ -44,7 +44,7 @@ class HrPayrollMovementLine(models.Model):
                     vals.get("amount"),
                 )
             )
-        write_result = super(HrPayrollMovementLine, self).write(vals)
+        write_result = super().write(vals)
         return write_result
 
     def approved_movement(self):

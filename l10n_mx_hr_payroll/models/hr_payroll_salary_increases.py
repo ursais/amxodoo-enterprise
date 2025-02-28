@@ -249,15 +249,15 @@ class HrPayrollSalaryIncreases(models.Model):
                     .sdi
                 )
 
-                antiquity = contract_obj.antiquity
-                line_pc = self.env["hr.payroll.pc.line"].search(
-                    [
-                        ("antiquity", ">", antiquity),
-                    ],
-                    limit=1,
-                )
+                # antiquity = contract_obj.antiquity
+                # line_pc = self.env["hr.payroll.pc.line"].search(
+                #     [
+                #         ("antiquity", ">", antiquity),
+                #     ],
+                #     limit=1,
+                # )
 
-        result = super(HrPayrollSalaryIncreases, self).create(vals)
+        result = super().create(vals)
         return result
 
     def write(self, vals):
@@ -268,14 +268,14 @@ class HrPayrollSalaryIncreases(models.Model):
                     vals.get("amount"),
                 )
             )
-        write_result = super(HrPayrollSalaryIncreases, self).write(vals)
+        write_result = super().write(vals)
         return write_result
 
     def unlink(self):
         for move in self:
             if move.state != "draft":
                 raise UserError(_("You can not delete this Salary increase Movement."))
-        return super(HrPayrollSalaryIncreases, self).unlink()
+        return super().unlink()
 
     @api.onchange("new_wage")
     def update_sdi(self):
@@ -329,7 +329,8 @@ class HrPayrollSalaryIncreases(models.Model):
             move.state = "approved"
             self.message_post(
                 body=_(
-                    "Payroll Salary Increase has been changed <b>%s</b> to Approve status",
+                    "Payroll Salary Increase has been changed"
+                    " <b>%s</b> to Approve status",
                     status,
                 )
             )
@@ -358,7 +359,8 @@ class HrPayrollSalaryIncreases(models.Model):
             salary_increase.state = "done"
             self.message_post(
                 body=_(
-                    "Payroll Salary Increase has been changed <b>%s</b> to Done status",
+                    "Payroll Salary Increase has been changed"
+                    " <b>%s</b> to Done status",
                     status,
                 )
             )
@@ -370,7 +372,8 @@ class HrPayrollSalaryIncreases(models.Model):
             salary_increase.state = "draft"
             self.message_post(
                 body=_(
-                    "Payroll Salary Increase has been changed <b>%s</b> to Draft status",
+                    "Payroll Salary Increase has been changed"
+                    " <b>%s</b> to Draft status",
                     status,
                 )
             )
@@ -386,7 +389,8 @@ class HrPayrollSalaryIncreases(models.Model):
             salary_increase.state = "cancel"
             self.message_post(
                 body=_(
-                    "Payroll Salary Increase has been changed <b>%s</b> to Cancel status",
+                    "Payroll Salary Increase has been changed"
+                    " <b>%s</b> to Cancel status",
                     status,
                 )
             )

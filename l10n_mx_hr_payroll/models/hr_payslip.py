@@ -548,8 +548,10 @@ class HrPayslip(models.Model):
             if not payslip.contract_id:
                 raise UserError(
                     _(
-                        "There's no contract set on payslip %(name)s for %(employee_id.name)s."
-                        "Check that there is at least a contract set on the employee form.",
+                        "There's no contract set on payslip "
+                        "%(name)s for %(employee_id.name)s."
+                        "Check that there is at least a contract "
+                        "set on the employee form.",
                         payslip.name,
                         payslip.employee_id.name,
                     )

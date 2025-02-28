@@ -83,7 +83,7 @@ class HrPayrollLoan(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        loans = super(HrPayrollLoan, self).create(vals_list)
+        loans = super().create(vals_list)
         return loans
 
     def write(self, vals):
@@ -94,5 +94,5 @@ class HrPayrollLoan(models.Model):
                     vals.get("amount"),
                 )
             )
-        write_result = super(HrPayrollLoan, self).write(vals)
+        write_result = super().write(vals)
         return write_result

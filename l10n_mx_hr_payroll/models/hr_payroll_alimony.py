@@ -87,7 +87,7 @@ class HrPayrollAlimony(models.Model):
                     _("You can not create an alimony with %s percent")
                     % str(vals.get("amount"))
                 )
-        result = super(HrPayrollAlimony, self).create(vals)
+        result = super().create(vals)
         return result
 
     def write(self, vals):
@@ -114,7 +114,8 @@ class HrPayrollAlimony(models.Model):
             alimony.state = "approved"
             self.message_post(
                 body=_(
-                    "Payroll Alimony with folio <b>%(alimony.name)s</b> has been changed "
+                    "Payroll Alimony with folio "
+                    "<b>%(alimony.name)s</b> has been changed "
                     "<b>%(status)s</b> to Approve status"
                 )
             )

@@ -67,10 +67,7 @@
                     <group>
                         <group>
                             <field name="report_type" />
-                            <field
-                                name="movt_type"
-                                invisible="report_type != 'movt'"
-                            />
+                            <field name="movt_type" invisible="report_type != 'movt'" />
                         </group>
                         <group>
                             <label for="date_start" string="Period" />

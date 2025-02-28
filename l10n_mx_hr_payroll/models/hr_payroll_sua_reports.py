@@ -108,7 +108,7 @@ class HrPayrollSUAReports(models.Model):
                 )
                 sua.line_ids.unlink()
                 for contract_id in contract_ids:
-                    line = self.env["hr.payroll.sua.reports.line"].create(
+                    self.env["hr.payroll.sua.reports.line"].create(
                         {
                             "line_id": sua.id,
                             "date": fields.Date.context_today(self),
@@ -317,8 +317,8 @@ class HrPayrollSUAReports(models.Model):
                 self.txt_file = base64.b64encode(lines.encode())
                 return {
                     "type": "ir.actions.act_url",
-                    "url": "/web/content/hr.payroll.sua.reports/"
-                    + "%s/txt_file/%s?download=true" % (self.id, "aseg.txt"),
+                    "url": f"/web/content/hr.payroll.sua.reports/{self.id}"
+                    f"/txt_file/aseg.txt?download=true",
                     "target": "self",
                 }
             elif sua.report_type == "movt":
@@ -340,10 +340,11 @@ class HrPayrollSUAReports(models.Model):
                         lines += "".join(str(d) for d in data) + "\n"
 
                     self.txt_file = base64.b64encode(lines.encode())
+
                     return {
                         "type": "ir.actions.act_url",
-                        "url": "/web/content/hr.payroll.sua.reports/"
-                        + "%s/txt_file/%s?download=true" % (self.id, "movt.txt"),
+                        "url": f"/web/content/hr.payroll.sua.reports/{self.id}"
+                        f"/txt_file/movt.txt?download=true",
                         "target": "self",
                     }
                 if sua.movt_type == "07":
@@ -375,8 +376,8 @@ class HrPayrollSUAReports(models.Model):
                     self.txt_file = base64.b64encode(lines.encode())
                     return {
                         "type": "ir.actions.act_url",
-                        "url": "/web/content/hr.payroll.sua.reports/"
-                        + "%s/txt_file/%s?download=true" % (self.id, "movt.txt"),
+                        "url": f"/web/content/hr.payroll.sua.reports/{self.id}"
+                        f"/txt_file/movt.txt?download=true",
                         "target": "self",
                     }
                 if sua.movt_type == "08":
@@ -402,10 +403,11 @@ class HrPayrollSUAReports(models.Model):
                         lines += "".join(str(d) for d in data) + "\n"
 
                     self.txt_file = base64.b64encode(lines.encode())
+
                     return {
                         "type": "ir.actions.act_url",
-                        "url": "/web/content/hr.payroll.sua.reports/"
-                        + "%s/txt_file/%s?download=true" % (self.id, "movt.txt"),
+                        "url": f"/web/content/hr.payroll.sua.reports/{self.id}"
+                        f"/txt_file/movt.txt?download=true",
                         "target": "self",
                     }
                 if sua.movt_type in ["11", "12"]:
@@ -433,8 +435,8 @@ class HrPayrollSUAReports(models.Model):
                     self.txt_file = base64.b64encode(lines.encode())
                     return {
                         "type": "ir.actions.act_url",
-                        "url": "/web/content/hr.payroll.sua.reports/"
-                        + "%s/txt_file/%s?download=true" % (self.id, "movt.txt"),
+                        "url": f"/web/content/hr.payroll.sua.reports/{self.id}"
+                        f"/txt_file/movt.txt?download=true",
                         "target": "self",
                     }
 

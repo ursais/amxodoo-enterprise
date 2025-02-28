@@ -62,7 +62,7 @@ class HrPayrollDispersion(models.TransientModel):
             self.txt_file = base64.b64encode(lines.encode())
             return {
                 "type": "ir.actions.act_url",
-                "url": "/web/content/hr.payroll.dispersion/%s/txt_file/%s?download=true"
-                % (self.id, self.bank_id.name + ".txt"),
+                "url": f"/web/content/hr.payroll.dispersion/{self.id}"
+                f"/txt_file/{self.bank_id.name}.txt?download=true",
                 "target": "self",
             }

@@ -6,7 +6,11 @@
         <field name="inherit_id" ref="hr_payroll.res_config_settings_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//div[@id='hr_payroll_accountant']" position="after">
-                <block class="row mt16" id="hr_payroll_mx_settings" title="Mexican Payroll">
+                <block
+                    class="row mt16"
+                    id="hr_payroll_mx_settings"
+                    title="Mexican Payroll"
+                >
                     <setting
                         class="col-12 col-lg-6"
                         id="hr_reporting_setting"
@@ -43,10 +47,7 @@
                             </div>
                         </div>
                     </setting>
-                    <setting
-                        class="col-12 col-lg-6"
-                        id="payroll_email_setting"
-                    >
+                    <setting class="col-12 col-lg-6" id="payroll_email_setting">
                         <div />
                         <div>
                             <span class="o_form_label">Configuration for e-mail</span>
@@ -72,10 +73,7 @@
                             </div>
                         </div>
                     </setting>
-                    <setting
-                        class="col-12 col-lg-6"
-                        id="payroll_settlement_setting"
-                    >
+                    <setting class="col-12 col-lg-6" id="payroll_settlement_setting">
                         <div />
                         <div>
                             <span class="o_form_label">Settlement configuration</span>
@@ -96,7 +94,11 @@
             </xpath>
 
             <xpath expr="//div[@id='companies']" position='after'>
-                <block class="row mt16" name="employee_names_order" title="Employee Names Order">
+                <block
+                    class="row mt16"
+                    name="employee_names_order"
+                    title="Employee Names Order"
+                >
                     <setting class="col-xs-12 col-md-6">
                         <div />
                     </setting>

@@ -33,7 +33,7 @@ class HrBonusProcess(models.Model):
 
     @api.model_create_multi
     def create(self, vals):
-        return super(HrBonusProcess, self).create(vals)
+        return super().create(vals)
 
     def write(self, vals):
         return super().write(vals)

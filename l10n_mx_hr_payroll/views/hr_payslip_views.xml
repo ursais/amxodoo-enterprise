@@ -17,10 +17,7 @@
                         create="0"
                         delete="0"
                     >
-                        <field
-                            name="name"
-                            invisible="hide_rule == True"
-                        />
+                        <field name="name" invisible="hide_rule == True" />
                         <field
                             name="code"
                             readonly="1"

@@ -62,7 +62,7 @@ class HrPayrollIDSEReports(models.Model):
         _logger.warning(str(vals))
         if "company_id" in vals:
             self = self.with_company(vals["company_id"])
-        result = super(HrPayrollIDSEReports, self).create(vals)
+        result = super().create(vals)
         return result
 
     def write(self, vals):
@@ -247,8 +247,10 @@ class HrPayrollIDSEReports(models.Model):
                 self.txt_file = base64.b64encode(lines.encode())
                 return {
                     "type": "ir.actions.act_url",
-                    "url": "/web/content/hr.payroll.idse.reports/%s/txt_file/%s?download=true"
-                    % (self.id, "alta.txt"),
+                    "url": (
+                        "/web/content/hr.payroll.idse.reports/"
+                        f"{self.id}/txt_file/alta.txt?download=true"
+                    ),
                     "target": "self",
                 }
 
@@ -288,10 +290,13 @@ class HrPayrollIDSEReports(models.Model):
 
                 lines += "".join(str(d) for d in data_end)
                 self.txt_file = base64.b64encode(lines.encode())
+
                 return {
                     "type": "ir.actions.act_url",
-                    "url": "/web/content/hr.payroll.idse.reports/%s/txt_file/%s?download=true"
-                    % (self.id, "baja.txt"),
+                    "url": (
+                        "/web/content/hr.payroll.idse.reports/"
+                        f"{self.id}/txt_file/baja.txt?download=true"
+                    ),
                     "target": "self",
                 }
 
@@ -342,10 +347,13 @@ class HrPayrollIDSEReports(models.Model):
 
                 lines += "".join(str(d) for d in data_end)
                 self.txt_file = base64.b64encode(lines.encode())
+
                 return {
                     "type": "ir.actions.act_url",
-                    "url": "/web/content/hr.payroll.idse.reports/%s/txt_file/%s?download=true"
-                    % (self.id, "mod_sal.txt"),
+                    "url": (
+                        "/web/content/hr.payroll.idse.reports/"
+                        f"{self.id}/txt_file/mod_sal.txt?download=true"
+                    ),
                     "target": "self",
                 }
 

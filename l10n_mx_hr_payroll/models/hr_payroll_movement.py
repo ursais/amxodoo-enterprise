@@ -44,7 +44,7 @@ class HrPayrollMovement(models.Model):
                     vals.get("amount"),
                 )
             )
-        write_result = super(HrPayrollMovement, self).write(vals)
+        write_result = super().write(vals)
         return write_result
 
     def _compute_movements_count(self):

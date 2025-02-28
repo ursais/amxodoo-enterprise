@@ -45,7 +45,7 @@ class ResConfigSettings(models.TransientModel):
     )
 
     def set_values(self):
-        super(ResConfigSettings, self).set_values()
+        super().set_values()
         self.env["ir.config_parameter"].sudo().set_param(
             "l10n_mx_hr_payroll.hr_payroll_mx_isr_anual", self.hr_payroll_mx_isr_anual
         )
@@ -68,7 +68,7 @@ class ResConfigSettings(models.TransientModel):
         return
 
     def get_values(self):
-        res = super(ResConfigSettings, self).get_values()
+        res = super().get_values()
         value = self.env["ir.config_parameter"].sudo()
         hr_payroll_smg_l10n_mx = value.get_param(
             "l10n_mx_hr_payroll.hr_payroll_smg_l10n_mx"

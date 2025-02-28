@@ -94,7 +94,7 @@ class HrPayslipEmployees(models.TransientModel):
             )
             if outside:
                 time_intervals_str = "\n - ".join(
-                    ["", *["%s -> %s" % (s[0], s[1]) for s in outside._items]]
+                    ["", *[f"{s[0]} -> {s[1]}" for s in outside._items]]
                 )
                 raise UserError(
                     _(
@@ -186,7 +186,7 @@ class HrPayslipEmployees(models.TransientModel):
                 for _contract, work_entries in work_entries_by_contract.items():
                     conflicts = work_entries._to_intervals()
                     time_intervals_str = "\n - ".join(
-                        ["", *["%s -> %s" % (s[0], s[1]) for s in conflicts._items]]
+                        ["", *[f"{s[0]} -> {s[1]}" for s in conflicts._items]]
                     )
                 return {
                     "type": "ir.actions.client",
@@ -232,7 +232,7 @@ class HrMovementEmployees(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        return super(HrMovementEmployees, self).default_get(fields)
+        return super().default_get(fields)
 
     def _get_available_contracts_domain(self):
         return [

@@ -53,10 +53,7 @@
                                 readonly="1 "
                                 invisible="date == False"
                             />
-                            <field
-                                name="employee_id"
-                                readonly="state != 'draft'"
-                            />
+                            <field name="employee_id" readonly="state != 'draft'" />
                             <field name="contract_id" invisible="1" />
                             <field name="period_id" />
                             <field

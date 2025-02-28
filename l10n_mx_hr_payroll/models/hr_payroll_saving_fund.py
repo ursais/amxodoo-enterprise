@@ -34,7 +34,7 @@ class HrPayrollSavingFund(models.Model):
                     vals.get("amount"),
                 )
             )
-        write_result = super(HrPayrollSavingFund, self).write(vals)
+        write_result = super().write(vals)
         return write_result
 
     def approved_saving_fund(self):

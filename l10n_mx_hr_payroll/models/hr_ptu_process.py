@@ -50,7 +50,7 @@ class HrPtuProcess(models.Model):
         #             amount_to_share
         #         )
         #     )
-        result = super(HrPtuProcess, self).create(vals)
+        result = super().create(vals)
         return result
 
     def write(self, vals):

@@ -13,14 +13,8 @@
             <xpath expr="//h1//field[@name='name']/.." position="after">
                 <group>
                     <field name="total_overtime" invisible="1" />
-                    <field
-                        name="firstname"
-                        required="lastname == False"
-                    />
-                    <field
-                        name="lastname"
-                        required="firstname == False"
-                    />
+                    <field name="firstname" required="lastname == False" />
+                    <field name="lastname" required="firstname == False" />
                     <field name="second_lastname" />
                 </group>
             </xpath>

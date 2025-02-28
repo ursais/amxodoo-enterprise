@@ -15,7 +15,8 @@ class HrEmployeeBase(models.AbstractModel):
         [
             (
                 "02",
-                "Salaries (Includes income specified in section I of article 94 of the Income Tax Law)",
+                "Salaries (Includes income specified in section I "
+                "of article 94 of the Income Tax Law)",
             ),
             ("03", "Retired"),
             ("04", "Pensioners"),

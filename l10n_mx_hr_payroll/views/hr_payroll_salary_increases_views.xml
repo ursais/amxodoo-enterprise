@@ -43,10 +43,7 @@
                         <group>
                             <field name="currency_id" invisible="1" />
                             <field name="date_apply" />
-                            <field
-                                name="employee_id"
-                                readonly="state != 'draft'"
-                            />
+                            <field name="employee_id" readonly="state != 'draft'" />
                             <field name="contract_id" readonly="1" />
                             <field
                                 name="salary_history_id"
@@ -95,11 +92,7 @@
                         </group>
                     </group>
                     <group string="Notes">
-                        <field
-                            name="notes"
-                            nolabel="1"
-                            readonly="state != 'draft'"
-                        />
+                        <field name="notes" nolabel="1" readonly="state != 'draft'" />
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -227,15 +220,9 @@
                         <group>
                             <field name="currency_id" invisible="1" />
                             <field name="date_start" />
-                            <field
-                                name="current_date"
-                                readonly="state != 'draft'"
-                            />
+                            <field name="current_date" readonly="state != 'draft'" />
                             <field name="increase_type" />
-                            <field
-                                name="amount"
-                                invisible="increase_type != amount"
-                            />
+                            <field name="amount" invisible="increase_type != amount" />
                             <field
                                 name="percent"
                                 invisible="increase_type != percent"
