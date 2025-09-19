@@ -12,7 +12,6 @@ class HrEmployee(models.Model):
     total_overtime = fields.Float(
         compute="_compute_total_overtime",
         compute_sudo=True,
-        groups="hr_attendance.group_hr_attendance_kiosk,hr_attendance.group_hr_attendance,hr.group_hr_user,base.group_user",
     )
 
     @api.model

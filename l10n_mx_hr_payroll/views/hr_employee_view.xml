@@ -12,7 +12,11 @@
             </xpath>
             <xpath expr="//h1//field[@name='name']/.." position="after">
                 <group>
-                    <field name="total_overtime" invisible="1" />
+                    <field
+                        name="total_overtime"
+                        invisible="1"
+                        groups="hr_attendance.group_hr_attendance_kiosk,hr_attendance.group_hr_attendance,hr.group_hr_user,base.group_user"
+                    />
                     <field
                         name="firstname"
                         attrs="{'required': [('lastname', '=', False)]}"
