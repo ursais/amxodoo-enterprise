@@ -123,7 +123,7 @@ class HrPayrollSUAReports(models.Model):
             else:
                 sua.name = "SUA Report - without specifying the type of movement"
 
-            sua.message_post(body=_("Payroll SUA Report has been Calculated"))
+            sua.message_post(body=_("Payroll SUA Report has been calculated"))
             return True
 
     def movements(self, sua):
@@ -314,7 +314,7 @@ class HrPayrollSUAReports(models.Model):
 
                     lines += "".join(str(d) for d in data) + "\n"
 
-                self.txt_file = base64.b64encode(lines.encode())
+                self.txt_file = base64.b64encode(lines.replace("Ñ", "N").encode())
                 return {
                     "type": "ir.actions.act_url",
                     "url": "/web/content/hr.payroll.sua.reports/"
@@ -339,7 +339,7 @@ class HrPayrollSUAReports(models.Model):
 
                         lines += "".join(str(d) for d in data) + "\n"
 
-                    self.txt_file = base64.b64encode(lines.encode())
+                    self.txt_file = base64.b64encode(lines.replace("Ñ", "N").encode())
                     return {
                         "type": "ir.actions.act_url",
                         "url": "/web/content/hr.payroll.sua.reports/"
@@ -372,7 +372,7 @@ class HrPayrollSUAReports(models.Model):
 
                         lines += "".join(str(d) for d in data) + "\n"
 
-                    self.txt_file = base64.b64encode(lines.encode())
+                    self.txt_file = base64.b64encode(lines.replace("Ñ", "N").encode())
                     return {
                         "type": "ir.actions.act_url",
                         "url": "/web/content/hr.payroll.sua.reports/"
@@ -401,7 +401,7 @@ class HrPayrollSUAReports(models.Model):
 
                         lines += "".join(str(d) for d in data) + "\n"
 
-                    self.txt_file = base64.b64encode(lines.encode())
+                    self.txt_file = base64.b64encode(lines.replace("Ñ", "N").encode())
                     return {
                         "type": "ir.actions.act_url",
                         "url": "/web/content/hr.payroll.sua.reports/"
@@ -430,7 +430,7 @@ class HrPayrollSUAReports(models.Model):
 
                         lines += "".join(str(d) for d in data) + "\n"
 
-                    self.txt_file = base64.b64encode(lines.encode())
+                    self.txt_file = base64.b64encode(lines.replace("Ñ", "N").encode())
                     return {
                         "type": "ir.actions.act_url",
                         "url": "/web/content/hr.payroll.sua.reports/"
