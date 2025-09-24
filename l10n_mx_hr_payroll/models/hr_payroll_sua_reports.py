@@ -314,7 +314,7 @@ class HrPayrollSUAReports(models.Model):
 
                     lines += "".join(str(d) for d in data) + "\n"
 
-                self.txt_file = base64.b64encode(lines.str_replace("Ñ", "N").encode())
+                self.txt_file = base64.b64encode(lines.replace("Ñ", "N").encode())
                 return {
                     "type": "ir.actions.act_url",
                     "url": "/web/content/hr.payroll.sua.reports/"
@@ -339,9 +339,7 @@ class HrPayrollSUAReports(models.Model):
 
                         lines += "".join(str(d) for d in data) + "\n"
 
-                    self.txt_file = base64.b64encode(
-                        lines.str_replace("Ñ", "N").encode()
-                    )
+                    self.txt_file = base64.b64encode(lines.replace("Ñ", "N").encode())
                     return {
                         "type": "ir.actions.act_url",
                         "url": "/web/content/hr.payroll.sua.reports/"
@@ -374,9 +372,7 @@ class HrPayrollSUAReports(models.Model):
 
                         lines += "".join(str(d) for d in data) + "\n"
 
-                    self.txt_file = base64.b64encode(
-                        lines.str_replace("Ñ", "N").encode()
-                    )
+                    self.txt_file = base64.b64encode(lines.replace("Ñ", "N").encode())
                     return {
                         "type": "ir.actions.act_url",
                         "url": "/web/content/hr.payroll.sua.reports/"
@@ -405,9 +401,7 @@ class HrPayrollSUAReports(models.Model):
 
                         lines += "".join(str(d) for d in data) + "\n"
 
-                    self.txt_file = base64.b64encode(
-                        lines.str_replace("Ñ", "N").encode()
-                    )
+                    self.txt_file = base64.b64encode(lines.replace("Ñ", "N").encode())
                     return {
                         "type": "ir.actions.act_url",
                         "url": "/web/content/hr.payroll.sua.reports/"
@@ -436,9 +430,7 @@ class HrPayrollSUAReports(models.Model):
 
                         lines += "".join(str(d) for d in data) + "\n"
 
-                    self.txt_file = base64.b64encode(
-                        lines.str_replace("Ñ", "N").encode()
-                    )
+                    self.txt_file = base64.b64encode(lines.replace("Ñ", "N").encode())
                     return {
                         "type": "ir.actions.act_url",
                         "url": "/web/content/hr.payroll.sua.reports/"
