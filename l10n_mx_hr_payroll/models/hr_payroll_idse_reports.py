@@ -244,7 +244,7 @@ class HrPayrollIDSEReports(models.Model):
                 data_end[6] = "9"
 
                 lines += "".join(str(d) for d in data_end)
-                self.txt_file = base64.b64encode(lines.encode())
+                self.txt_file = base64.b64encode(lines.encode("cp1252"))
                 return {
                     "type": "ir.actions.act_url",
                     "url": "/web/content/hr.payroll.idse.reports/%s/txt_file/%s?download=true"
@@ -287,7 +287,7 @@ class HrPayrollIDSEReports(models.Model):
                 data_end[6] = "9"
 
                 lines += "".join(str(d) for d in data_end)
-                self.txt_file = base64.b64encode(lines.encode())
+                self.txt_file = base64.b64encode(lines.encode("cp1252"))
                 return {
                     "type": "ir.actions.act_url",
                     "url": "/web/content/hr.payroll.idse.reports/%s/txt_file/%s?download=true"
@@ -341,7 +341,7 @@ class HrPayrollIDSEReports(models.Model):
                 data_end[6] = "9"
 
                 lines += "".join(str(d) for d in data_end)
-                self.txt_file = base64.b64encode(lines.encode())
+                self.txt_file = base64.b64encode(lines.encode("cp1252"))
                 return {
                     "type": "ir.actions.act_url",
                     "url": "/web/content/hr.payroll.idse.reports/%s/txt_file/%s?download=true"
