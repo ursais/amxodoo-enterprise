@@ -314,7 +314,7 @@ class HrPayrollSUAReports(models.Model):
 
                     lines += "".join(str(d) for d in data) + "\n"
 
-                self.txt_file = base64.b64encode(lines.encode())
+                self.txt_file = base64.b64encode(lines.encode("cp1252"))
                 return {
                     "type": "ir.actions.act_url",
                     "url": "/web/content/hr.payroll.sua.reports/"
@@ -339,7 +339,7 @@ class HrPayrollSUAReports(models.Model):
 
                         lines += "".join(str(d) for d in data) + "\n"
 
-                    self.txt_file = base64.b64encode(lines.encode())
+                    self.txt_file = base64.b64encode(lines.encode("cp1252"))
                     return {
                         "type": "ir.actions.act_url",
                         "url": "/web/content/hr.payroll.sua.reports/"
@@ -372,7 +372,7 @@ class HrPayrollSUAReports(models.Model):
 
                         lines += "".join(str(d) for d in data) + "\n"
 
-                    self.txt_file = base64.b64encode(lines.encode())
+                    self.txt_file = base64.b64encode(lines.encode("cp1252"))
                     return {
                         "type": "ir.actions.act_url",
                         "url": "/web/content/hr.payroll.sua.reports/"
@@ -401,7 +401,7 @@ class HrPayrollSUAReports(models.Model):
 
                         lines += "".join(str(d) for d in data) + "\n"
 
-                    self.txt_file = base64.b64encode(lines.encode())
+                    self.txt_file = base64.b64encode(lines.encode("cp1252"))
                     return {
                         "type": "ir.actions.act_url",
                         "url": "/web/content/hr.payroll.sua.reports/"
@@ -430,7 +430,7 @@ class HrPayrollSUAReports(models.Model):
 
                         lines += "".join(str(d) for d in data) + "\n"
 
-                    self.txt_file = base64.b64encode(lines.encode())
+                    self.txt_file = base64.b64encode(lines.encode("cp1252"))
                     return {
                         "type": "ir.actions.act_url",
                         "url": "/web/content/hr.payroll.sua.reports/"
