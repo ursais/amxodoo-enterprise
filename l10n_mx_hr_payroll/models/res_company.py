@@ -26,7 +26,7 @@ class ResCompany(models.Model):
         "hr.payroll.structure", string="Structure"
     )
 
-    guia_subdelegacion = fields.Integer(
+    guia_subdelegacion = fields.Char(
         string="Guia Subdelegación", help="Entrar el numero de 5 digitos"
     )
 
@@ -34,12 +34,10 @@ class ResCompany(models.Model):
     def _check_five_digit_number(self):
         for record in self:
             if record.guia_subdelegacion:
-                if (
-                    record.guia_subdelegacion < 10000
-                    or record.guia_subdelegacion > 99999
-                ):
+                guia_str = str(record.guia_subdelegacion).strip()
+                if len(guia_str) != 5 or not guia_str.isdigit():
                     raise ValidationError(
-                        _("The number for Guia Subdelegación must be 5 digits.")
+                        _("The Guia Subdelegación must be exactly 5 numeric characters.")
                     )
 
     @api.model
