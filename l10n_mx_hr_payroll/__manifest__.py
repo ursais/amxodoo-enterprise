@@ -64,6 +64,7 @@
         "views/hr_payroll_idse_process_views.xml",
         "views/hr_leave_type_views.xml",
         "views/report_payslip_templates.xml",
+        "views/res_partner_view_form_private.xml",
         "reports/hr_payslip.xml",
         "reports/hr_payroll_templates.xml",
         "reports/hr_payslip_line.xml",

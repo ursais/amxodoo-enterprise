@@ -1,0 +1,17 @@
+<odoo>
+    
+        <record id="view_res_partner_form_private_inherit" model="ir.ui.view">
+            <field name="name">res.partner.view.form.private.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_view_form_private"/>
+            <field name="arch" type="xml">
+                
+                <!-- Add CURP field after the VAT field -->
+                <field name="country_id" position="after">
+                    <field name="vat" placeholder="RFC" />
+                    <field name="curp" placeholder="CURP" />
+                </field>
+            </field>
+        </record>
+    
+</odoo>
