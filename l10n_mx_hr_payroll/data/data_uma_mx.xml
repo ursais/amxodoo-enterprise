@@ -1,4 +1,11 @@
 <odoo noupdate="1">
+        <record id="table_uma_2026" model="hr.payroll.uma">
+            <field name="name">UMA - 01/01/2026</field>
+            <field name="date" eval="time.strftime('2022-01-01')" />
+            <field name="daily">117.31</field>
+            <field name="monthly">3566.22</field>
+            <field name="yearly">42794.64</field>
+        </record>
 
         <record id="table_uma_2024" model="hr.payroll.uma">
             <field name="name">UMA - 01/01/2024</field>

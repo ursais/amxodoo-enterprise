@@ -1,5 +1,11 @@
 <odoo noupdate="1">
 
+        <record id="table_umi_2026" model="hr.payroll.umi">
+            <field name="name">UMI - 01/01/2026</field>
+            <field name="date" eval="time.strftime('2026-01-01')" />
+            <field name="amount">117.31</field>
+        </record>
+
         <record id="table_umi_2024" model="hr.payroll.umi">
             <field name="name">UMI - 01/01/2024</field>
             <field name="date" eval="time.strftime('2024-01-01')" />
