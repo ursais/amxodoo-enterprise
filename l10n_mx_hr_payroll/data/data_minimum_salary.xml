@@ -2,7 +2,7 @@
 
         <record id="table_minimum_salary_2024" model="hr.payroll.ms">
             <field name="name">SMG - 01/01/2026</field>
-            <field name="date" eval="time.strftime('2024-01-01')" />
+            <field name="date" eval="time.strftime('2026-01-01')" />
             <field name="zone1">315.04</field>
             <field name="zone2">315.04</field>
             <field name="zone3">440.87</field>
