@@ -528,4 +528,5 @@
             <field name="percent">35.00</field>
             <field name="line_id" ref="table_of_isr_monthly_0526" />
         </record>
-    </odoo>
+
+</odoo>
