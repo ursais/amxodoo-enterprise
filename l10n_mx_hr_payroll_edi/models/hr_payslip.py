@@ -514,7 +514,7 @@ class HrPayslip(models.Model):
 
     def compute_sheet(self):
         if self.journal_id.edi_format_ids.code != "cfdi_1_2":
-            return super().action_payslip_done()
+            return super().compute_sheet()
         payslips = self.filtered(lambda slip: slip.state in ["draft", "verify"])
 
         # delete old payslip lines
