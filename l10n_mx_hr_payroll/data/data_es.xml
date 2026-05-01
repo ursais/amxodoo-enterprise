@@ -1,9 +1,10 @@
 <odoo>
         <!-- Employment Subsidy Table - Weekly -->
         <record id="table_of_es_weekly_0524" model="hr.payroll.es">
-            <field name="code">ES 2024 - weekly</field>
-            <field name="name">Tabla de Employment Subsidy 2024 - Weekly</field>
+            <field name="code">ES 2024 - Weekly</field>
+            <field name="name">Employment Subsidy 2024 - Weekly</field>
             <field name="type_table">w</field>
+            <field name="date">2026-01-01</field>
         </record>
 
         <record id="hr_payroll_es_anual_0521_line001" model="hr.payroll.es.line">
