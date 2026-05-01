@@ -627,7 +627,7 @@
         <record id="hr_payroll_isr_monthly_26_line010" model="hr.payroll.isr.line">
             <field name="name">10</field>
             <field name="lim_inf">141880.67</field>
-            <field name="lim_sup">425641.99.61</field>
+            <field name="lim_sup">425641.99</field>
             <field name="fix_fee">37009.69</field>
             <field name="percent">34.00</field>
             <field name="line_id" ref="table_of_isr_monthly_26" />
@@ -637,7 +637,7 @@
             <field name="name">11</field>
             <field name="lim_inf">425642.00</field>
             <field name="lim_sup">999999999.00</field>
-            <field name="fix_fee">133488.54.32</field>
+            <field name="fix_fee">133488.54</field>
             <field name="percent">35.00</field>
             <field name="line_id" ref="table_of_isr_monthly_26" />
         </record>
@@ -744,7 +744,7 @@
             <field name="name">11</field>
             <field name="lim_inf">210020.71</field>
             <field name="lim_sup">999999999.00</field>
-            <field name="fix_fee">65866.05.35</field>
+            <field name="fix_fee">65866.05</field>
             <field name="percent">35.00</field>
             <field name="line_id" ref="table_of_isr_biweekly_26" />
         </record>
@@ -851,7 +851,7 @@
             <field name="name">11</field>
             <field name="lim_inf">98009.67</field>
             <field name="lim_sup">999999999.00</field>
-            <field name="fix_fee">30737.49.54</field>
+            <field name="fix_fee">30737.49</field>
             <field name="percent">35.00</field>
             <field name="line_id" ref="table_of_isr_weekly_26" />
         </record>
