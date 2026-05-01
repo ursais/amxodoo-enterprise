@@ -7,7 +7,8 @@ class HrPayrollIsr(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
     code = fields.Char(required=True)
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, translate=True)
+    date = fields.Date(string="Effective after", required=True)
     active = fields.Boolean(default=True)
     type_table = fields.Selection(
         [
@@ -16,9 +17,16 @@ class HrPayrollIsr(models.Model):
             ("t", "Every 10 days"),
             ("b", "Biweekly"),
             ("m", "Monthly"),
-            ("a", "Anually"),
+            ("a", "Annually"),
         ],
         string="Type",
-        help="""* """,
     )
     line_ids = fields.One2many("hr.payroll.isr.line", "line_id", string="Periods Lines")
+
+    _sql_constraints = [
+        (
+            "unique_type_table_date",
+            "UNIQUE(type_table, date)",
+            "A record with this type and date already exists.",
+        )
+    ]

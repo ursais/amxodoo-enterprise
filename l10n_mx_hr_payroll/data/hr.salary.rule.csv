@@ -10,11 +10,12 @@ l10n_mx_hr_payroll.hr_salary_rule_p010_christmas_bonus,Prima Vacacional,hr_payro
 l10n_mx_hr_payroll.hr_salary_rule_p207_christmas_bonus,Liquidacion de Fondo de Ahorro,hr_payroll.ALW,P207,,1100,l10n_mx_hr_payroll.structure_mx_special_christmas_bonus,none,code,result = contract.wage * 0.10
 l10n_mx_hr_payroll.hr_salary_rule_talw_christmas_bonus,Total Percepciones,hr_payroll.NET,TALW,,4999,l10n_mx_hr_payroll.structure_mx_special_christmas_bonus,none,code,result = categories.ALW
 l10n_mx_hr_payroll.hr_salary_rule_auxisr_christmas_bonus,Auxiliar de ISR,l10n_mx_hr_payroll.CAT_AUX,AUXISR,,5001,l10n_mx_hr_payroll.structure_mx_special_christmas_bonus,none,code,"sbc = categories.ALW
-lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
+table = payslip.env['hr.payroll.isr'].search([('type_table', '=', 'm'), ('date', '<=', payslip.date_to)], limit=1, orderby='date DESC').id
+lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
 excedente_lim_inf = sbc - lim_inf
-percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
+percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
 marginal_tax = excedente_lim_inf * ( percent / 100 )
-fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
+fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
 result = fix_fee + marginal_tax"
 l10n_mx_hr_payroll.hr_salary_rule_d001_christmas_bonus,ISR,hr_payroll.DED,D001,,5100,l10n_mx_hr_payroll.structure_mx_special_christmas_bonus,none,code,result = contract.wage * 0.10
 l10n_mx_hr_payroll.hr_salary_rule_tded_christmas_bonus,Total Deducciones,hr_payroll.NET,TDED,,9999,l10n_mx_hr_payroll.structure_mx_special_christmas_bonus,none,code,result = categories.DED
@@ -35,11 +36,12 @@ l10n_mx_hr_payroll.hr_salary_rule_p216_settlement,Liquidacion de Fondo de Ahorro
 l10n_mx_hr_payroll.hr_salary_rule_p217_settlement,Liquidacion de Fondo de Ahorro,hr_payroll.ALW,P217,,2002,l10n_mx_hr_payroll.structure_mx_special_settlement,none,code,result = 600.89
 l10n_mx_hr_payroll.hr_salary_rule_talw_settlement,Total Percepciones,hr_payroll.NET,TALW,,4999,l10n_mx_hr_payroll.structure_mx_special_settlement,none,code,result = categories.ALW
 l10n_mx_hr_payroll.hr_salary_rule_auxisr_settlement,Auxiliar de ISR,l10n_mx_hr_payroll.CAT_AUX,AUXISR,,5001,l10n_mx_hr_payroll.structure_mx_special_settlement,none,code,"sbc = categories.ALW
-lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
+table = payslip.env['hr.payroll.isr'].search([('type_table', '=', 'm'), ('date', '<=', payslip.date_to)], limit=1, orderby='date DESC').id
+lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
 excedente_lim_inf = sbc - lim_inf
-percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
+percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
 marginal_tax = excedente_lim_inf * ( percent / 100 )
-fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
+fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
 result = fix_fee + marginal_tax"
 l10n_mx_hr_payroll.hr_salary_rule_d001_settlement,ISR,hr_payroll.DED,D001,,5150,l10n_mx_hr_payroll.structure_mx_special_settlement,none,code,result = AUXISR
 l10n_mx_hr_payroll.hr_salary_rule_tded_settlement,Total de Deducciones,hr_payroll.NET,TDED,,9999,l10n_mx_hr_payroll.structure_mx_special_settlement,none,code,result = categories.DED
@@ -57,11 +59,12 @@ l10n_mx_hr_payroll.hr_salary_rule_weekly_4999,Total Percepciones,hr_payroll.NET,
 l10n_mx_hr_payroll.hr_salary_rule_weekly_SAE_5109,Auxiliar Subsidio al empledo,hr_payroll.DED,AUXSAE,,5109,l10n_mx_hr_payroll.structure_mx_employee_weekly,none,code,"sbc = 100.00
 result = contract.env['hr.payroll.es.line'].search([('line_id','=', 2),('inf_sup','>=', sbc ),('lim_sup','<=', sbc )],limit=1).fix_fee"
 l10n_mx_hr_payroll.hr_salary_rule_weekly_AISR_5110,Auxiliar de ISR,l10n_mx_hr_payroll.CAT_AUX,AUXISR,,5110,l10n_mx_hr_payroll.structure_mx_employee_weekly,none,code,"sbc = categories.ALW
-lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
+table = payslip.env['hr.payroll.isr'].search([('type_table', '=', 'w'), ('date', '<=', payslip.date_to)], limit=1, orderby='date DESC').id
+lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
 excedente_lim_inf = sbc - lim_inf
-percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
+percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
 marginal_tax = excedente_lim_inf * ( percent / 100 )
-fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
+fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
 result = fix_fee + marginal_tax"
 l10n_mx_hr_payroll.hr_salary_rule_weekly_SAE,Subsidio al empledo,l10n_mx_hr_payroll.OTPAY,D041,,5150,l10n_mx_hr_payroll.structure_mx_employee_weekly,none,code,"sbc = TALW
 result = contract.env['hr.payroll.es.line'].search([('line_id','=', 2),('inf_sup','>=', sbc ),('lim_sup','<=', sbc )],limit=1).fix_fee"
@@ -83,11 +86,12 @@ l10n_mx_hr_payroll.hr_salary_rule_weekly_sp_4999,Total Percepciones,hr_payroll.N
 l10n_mx_hr_payroll.hr_salary_rule_weekly_sp_SAE_5109,Auxiliar Subsidio al empledo,hr_payroll.DED,AUXSAE,,5109,l10n_mx_hr_payroll.structure_mx_employee_weekly_special,none,code,"sbc = 100.00
 result = contract.env['hr.payroll.es.line'].search([('line_id','=', 2),('inf_sup','>=', sbc ),('lim_sup','<=', sbc )],limit=1).fix_fee"
 l10n_mx_hr_payroll.hr_salary_rule_weekly_sp_AISR_5110,Auxiliar de ISR,l10n_mx_hr_payroll.CAT_AUX,AUXISR,,5110,l10n_mx_hr_payroll.structure_mx_employee_weekly_special,none,code,"sbc = categories.ALW
-lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
+table = payslip.env['hr.payroll.isr'].search([('type_table', '=', 'w'), ('date', '<=', payslip.date_to)], limit=1, orderby='date DESC').id
+lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
 excedente_lim_inf = sbc - lim_inf
-percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
+percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
 marginal_tax = excedente_lim_inf * ( percent / 100 )
-fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
+fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
 result = fix_fee + marginal_tax"
 l10n_mx_hr_payroll.hr_salary_rule_weekly_sp_SAE,Subsidio al empledo,l10n_mx_hr_payroll.OTPAY,D041,,5150,l10n_mx_hr_payroll.structure_mx_employee_weekly_special,none,code,"sbc = TALW
 result = contract.env['hr.payroll.es.line'].search([('line_id','=', 2),('inf_sup','>=', sbc ),('lim_sup','<=', sbc )],limit=1).fix_fee"
@@ -107,11 +111,12 @@ l10n_mx_hr_payroll.hr_salary_rule_biweekly_4999,Total Percepciones,hr_payroll.NE
 l10n_mx_hr_payroll.hr_salary_rule_biweekly_SAE_5109,Auxiliar Subsidio al empledo,hr_payroll.DED,AUXSAE,,5109,l10n_mx_hr_payroll.structure_mx_employee_biweekly,none,code,"sbc = 100.00
 result = contract.env['hr.payroll.es.line'].search([('line_id','=', 2),('inf_sup','>=', sbc ),('lim_sup','<=', sbc )],limit=1).fix_fee"
 l10n_mx_hr_payroll.hr_salary_rule_biweekly_AISR_5110,Auxiliar de ISR,l10n_mx_hr_payroll.CAT_AUX,AUXISR,,5110,l10n_mx_hr_payroll.structure_mx_employee_biweekly,none,code,"sbc = categories.ALW
-lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
+table = payslip.env['hr.payroll.isr'].search([('type_table', '=', 'b'), ('date', '<=', payslip.date_to)], limit=1, orderby='date DESC').id
+lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
 excedente_lim_inf = sbc - lim_inf
-percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
+percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
 marginal_tax = excedente_lim_inf * ( percent / 100 )
-fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
+fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
 result = fix_fee + marginal_tax"
 l10n_mx_hr_payroll.hr_salary_rule_biweekly_SAE,Subsidio al empledo,l10n_mx_hr_payroll.OTPAY,D041,,5150,l10n_mx_hr_payroll.structure_mx_employee_biweekly,none,code,"sbc = TALW
 result = contract.env['hr.payroll.es.line'].search([('line_id','=', 2),('inf_sup','>=', sbc ),('lim_sup','<=', sbc )],limit=1).fix_fee"
@@ -133,11 +138,12 @@ l10n_mx_hr_payroll.hr_salary_rule_biweekly_sp_4999,Total Percepciones,hr_payroll
 l10n_mx_hr_payroll.hr_salary_rule_biweekly_sp_SAE_5109,Auxiliar Subsidio al empledo,hr_payroll.DED,AUXSAE,,5109,l10n_mx_hr_payroll.structure_mx_employee_biweekly_special,none,code,"sbc = 100.00
 result = contract.env['hr.payroll.es.line'].search([('line_id','=', 2),('inf_sup','>=', sbc ),('lim_sup','<=', sbc )],limit=1).fix_fee"
 l10n_mx_hr_payroll.hr_salary_rule_biweekly_sp_AISR_5110,Auxiliar de ISR,l10n_mx_hr_payroll.CAT_AUX,AUXISR,,5110,l10n_mx_hr_payroll.structure_mx_employee_biweekly_special,none,code,"sbc = categories.ALW
-lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
+table = payslip.env['hr.payroll.isr'].search([('type_table', '=', 'b'), ('date', '<=', payslip.date_to)], limit=1, orderby='date DESC').id
+lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
 excedente_lim_inf = sbc - lim_inf
-percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
+percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
 marginal_tax = excedente_lim_inf * ( percent / 100 )
-fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
+fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
 result = fix_fee + marginal_tax"
 l10n_mx_hr_payroll.hr_salary_rule_biweekly_sp_SAE,Subsidio al empledo,l10n_mx_hr_payroll.OTPAY,D041,,5150,l10n_mx_hr_payroll.structure_mx_employee_biweekly_special,none,code,"sbc = TALW
 result = contract.env['hr.payroll.es.line'].search([('line_id','=', 2),('inf_sup','>=', sbc ),('lim_sup','<=', sbc )],limit=1).fix_fee"
@@ -147,11 +153,12 @@ l10n_mx_hr_payroll.hr_salary_rule_biweekly_sp_10000,Salario Neto,hr_payroll.NET,
 l10n_mx_hr_payroll.hr_salary_rule_ptu_1000,Profit sharing,hr_payroll.ALW,P011,,1000,l10n_mx_hr_payroll.structure_mx_ptu,python,code,result = (( inputs.ATSPTU.amount / inputs.TWDPTU.amount ) * inputs.WDPTU.amount) + (5)
 l10n_mx_hr_payroll.hr_salary_rule_ptu_sp_4999,Total Percepciones,hr_payroll.NET,TALW,,4999,l10n_mx_hr_payroll.structure_mx_ptu,none,code,result = categories.ALW
 l10n_mx_hr_payroll.hr_salary_rule_ptu_sp_AISR_5110,Auxiliar de ISR,l10n_mx_hr_payroll.CAT_AUX,AUXISR,,5110,l10n_mx_hr_payroll.structure_mx_ptu,none,code,"sbc = categories.ALW
-lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
+table = payslip.env['hr.payroll.isr'].search([('type_table', '=', 'a'), ('date', '<=', payslip.date_to)], limit=1, orderby='date DESC').id
+lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
 excedente_lim_inf = sbc - lim_inf
-percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
+percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
 marginal_tax = excedente_lim_inf * ( percent / 100 )
-fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
+fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
 result = fix_fee + marginal_tax"
 l10n_mx_hr_payroll.hr_salary_rule_ptu_sp_isr_5150,ISR,hr_payroll.DED,D045,,5150,l10n_mx_hr_payroll.structure_mx_ptu,none,code,result = AUXISR
 l10n_mx_hr_payroll.hr_salary_rule_ptu_sp_9999,Total Deducciones,hr_payroll.NET,TDED,,9999,l10n_mx_hr_payroll.structure_mx_ptu,none,code,result = categories.DED
@@ -159,11 +166,12 @@ l10n_mx_hr_payroll.hr_salary_rule_ptu_sp_10000,Salario Neto,hr_payroll.NET,SLYN,
 l10n_mx_hr_payroll.hr_salary_rule_bonus_1000,Bonus,hr_payroll.ALW,P011,,1000,l10n_mx_hr_payroll.structure_mx_bonus,python,code,result = (( inputs.ATSPTU.amount / inputs.TWDPTU.amount ) * inputs.WDPTU.amount) + (5)
 l10n_mx_hr_payroll.hr_salary_rule_bonus_sp_4999,Total Percepciones,hr_payroll.NET,TALW,,4999,l10n_mx_hr_payroll.structure_mx_bonus,none,code,result = categories.ALW
 l10n_mx_hr_payroll.hr_salary_rule_bonus_sp_AISR_5110,Auxiliar de ISR,l10n_mx_hr_payroll.CAT_AUX,AUXISR,,5110,l10n_mx_hr_payroll.structure_mx_bonus,none,code,"sbc = categories.ALW
-lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
+table = payslip.env['hr.payroll.isr'].search([('type_table', '=', 'a'), ('date', '<=', payslip.date_to)], limit=1, orderby='date DESC').id
+lim_inf = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).lim_inf
 excedente_lim_inf = sbc - lim_inf
-percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
+percent = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).percent
 marginal_tax = excedente_lim_inf * ( percent / 100 )
-fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', 4),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
+fix_fee = contract.env['hr.payroll.isr.line'].search([('line_id','=', table),('lim_inf','<=', sbc ),('lim_sup','>=', sbc )],limit=1).fix_fee
 result = fix_fee + marginal_tax"
 l10n_mx_hr_payroll.hr_salary_rule_bonus_sp_isr_5150,ISR,hr_payroll.DED,D045,,5150,l10n_mx_hr_payroll.structure_mx_bonus,none,code,result = AUXISR
 l10n_mx_hr_payroll.hr_salary_rule_bonus_sp_9999,Total Deducciones,hr_payroll.NET,TDED,,9999,l10n_mx_hr_payroll.structure_mx_bonus,none,code,result = categories.DED

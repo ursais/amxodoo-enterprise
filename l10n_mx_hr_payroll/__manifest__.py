@@ -2,9 +2,7 @@
     "name": "HR Payroll Mexico",
     "icon": "/l10n_mx/static/description/icon.png",
     "summary": """HR payroll requirements for Mexico """,
-    "author": "e-maanu, "
-    "Open Source Integrators, "
-    "Odoo Mexican Association (AMOdoo)",
+    "author": "e-maanu, Gray Matter Logic, Odoo Mexican Association (AMOdoo)",
     "website": "https://github.com/amxodoo/enterprise",
     "category": "Human Resources/Payroll",
     "version": "16.0.1.0.0",
@@ -70,9 +68,9 @@
         "views/hr_payroll_menu.xml",
         "data/sequence.xml",
         "views/res_config_settings_view.xml",
-        "data/data_isr_0521.xml",
-        "data/data_es_0521.xml",
-        "data/data_pc_0521.xml",
+        "data/data_isr.xml",
+        "data/data_es.xml",
+        "data/data_pc.xml",
         "data/data_minimum_salary.xml",
         "data/data_uma_mx.xml",
         "data/data_umi_mx.xml",
