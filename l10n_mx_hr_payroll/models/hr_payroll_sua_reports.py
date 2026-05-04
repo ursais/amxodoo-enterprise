@@ -276,43 +276,135 @@ class HrPayrollSUAReports(models.Model):
         for sua in self:
             if sua.report_type == "alta":
                 for line in self.line_ids:
-                    len_name = (
-                        len(str(line.name.lastname))
-                        + len(str(line.name.second_lastname))
-                        + len(str(line.name.firstname))
+                    contract = line.contract_id
+                    employee = line.name
+                    
+                    # Get contract date components
+                    reg_date = contract.date_start
+                    day = str(reg_date.day).zfill(2)
+                    month = str(reg_date.month).zfill(2)
+                    year = str(reg_date.year)
+                    
+                    # Get employee name components
+                    lastname = str(employee.lastname or "").upper()
+                    second_lastname = str(employee.second_lastname or "").upper()
+                    firstname = str(employee.firstname or "").upper()
+                    
+                    # Nombre fragmento 1: LEFT(col & espacios, 13) - lastname
+                    fragmento_1 = (lastname + " " * 13)[:13]
+                    
+                    # Nombre fragmento 2: LEFT(col & espacios, 18) - second_lastname
+                    fragmento_2 = (second_lastname + " " * 18)[:18]
+                    
+                    # Nombre completo con $ separador, pad a 50 caracteres
+                    nombre_completo = f"{lastname}${second_lastname}${firstname}"
+                    nombre_completo_padded = (nombre_completo + " " * 50)[:50]
+                    
+                    # Tipo trabajador: from contract_type
+                    # Mapping contract_type to worker type (1=Permanente, 2=Eventual, 3=Ev. Construcción)
+                    contract_type = contract.contract_type or "01"
+                    if contract_type in ["01", "03"]:  # Indefinite, Specific period
+                        tipo_trabajador = "1"
+                    elif contract_type in ["02", "04", "05", "06", "07", "08"]:
+                        tipo_trabajador = "2"
+                    else:
+                        tipo_trabajador = "1"  # Default to permanente
+                    
+                    # Tipo jornada: from journal_type
+                    # 0=Completa, 1-5=días trabajados, 6=menos de 1 día
+                    journal_type = contract.journal_type or "00"
+                    if journal_type == "00":
+                        tipo_jornada = "0"
+                    elif journal_type in ["01", "02", "03", "04", "05"]:
+                        tipo_jornada = journal_type[-1]  # Get last digit: 1, 2, 3, 4, 5
+                    elif journal_type == "06":
+                        tipo_jornada = "6"
+                    else:
+                        tipo_jornada = "0"
+                    
+                    # Tipo salario: from salary_type
+                    # 01=Fixed, 02=Mixte, 03=Variable -> mapped to SUA codes
+                    salary_type = contract.salary_type or "01"
+                    # Map to SUA salary type codes (need to verify exact mapping)
+                    if salary_type == "01":
+                        tipo_salario = "0"  # Fixed -> 0
+                    elif salary_type == "02":
+                        tipo_salario = "1"  # Mixte -> 1
+                    else:
+                        tipo_salario = "2"  # Variable -> 2
+                    
+                    # Salario diario integrado (SDI)
+                    sdi = contract.sdi or 0.0
+                    sdi_entero = int(sdi)
+                    sdi_decimal = int(round((sdi - sdi_entero) * 100))
+                    
+                    # Format salary: entero (5 digits) + decimales (2 digits)
+                    salario_entero = str(sdi_entero).zfill(5)[-5:]  # RIGHT("00000"& INT(sal), 5)
+                    salario_decimales = str(sdi_decimal).zfill(2)[-2:]  # RIGHT(FIXED(sal,2), 2)
+                    
+                    # NSS: If 10 digits -> "0"&NSS, if 11 -> NSS as is
+                    ssnid = str(employee.ssnid or "")
+                    if len(ssnid) == 10:
+                        nss = "0" + ssnid
+                    elif len(ssnid) == 11:
+                        nss = ssnid
+                    else:
+                        nss = ssnid.zfill(11)
+                    
+                    # Worker name (17 chars) - repeat full name padded
+                    nombre_trabajador_17c = (lastname + second_lastname + firstname + " " * 17)[:17]
+                    
+                    # Get employer register
+                    employer_register = employee.employer_register.name if employee.employer_register else ""
+                    
+                    # Tipo salario code (8 chars)
+                    tipo_salario_code = tipo_salario + " " * 7
+                    
+                    # Build the record according to new format (164 characters total)
+                    # Position mapping:
+                    # 1-11: Registro Patronal (11 chars)
+                    # 12-22: NSS (11 chars)
+                    # 23-35: Nombre fragmento 1 (13 chars)
+                    # 36-53: Nombre fragmento 2 (18 chars)
+                    # 54-103: Datos compuestos con $ separador (50 chars)
+                    # 104-104: Tipo trabajador (1 char)
+                    # 105-105: Tipo jornada (1 char)
+                    # 106-107: Día de alta (2 chars)
+                    # 108-109: Mes de alta (2 chars)
+                    # 110-113: Año de alta (4 chars)
+                    # 114-118: Salario entero (5 chars)
+                    # 119-120: Salario decimales (2 chars)
+                    # 121-137: Nombre trabajador (17 chars)
+                    # 138-147: Espacios vacíos (10 chars)
+                    # 148-149: Día de alta repetido (2 chars)
+                    # 150-151: Mes de alta repetido (2 chars)
+                    # 152-155: Año de alta repetido (4 chars)
+                    # 156-156: Espacio separador (1 char)
+                    # 157-164: Tipo salario (8 chars)
+                    
+                    record = (
+                        employer_register[:11].ljust(11) +           # 1-11: Registro Patronal
+                        nss +                                        # 12-22: NSS
+                        fragmento_1 +                                # 23-35: Nombre fragmento 1
+                        fragmento_2 +                                # 36-53: Nombre fragmento 2
+                        nombre_completo_padded +                     # 54-103: Datos compuestos
+                        tipo_trabajador +                            # 104: Tipo trabajador
+                        tipo_jornada +                               # 105: Tipo jornada
+                        day +                                        # 106-107: Día
+                        month +                                      # 108-109: Mes
+                        year +                                       # 110-113: Año
+                        salario_entero +                             # 114-118: Salario entero
+                        salario_decimales +                          # 119-120: Salario decimales
+                        nombre_trabajador_17c +                      # 121-137: Nombre trabajador
+                        " " * 10 +                                   # 138-147: Espacios vacíos
+                        day +                                        # 148-149: Día repetido
+                        month +                                      # 150-151: Mes repetido
+                        year +                                       # 152-155: Año repetido
+                        " " +                                        # 156: Espacio separador
+                        tipo_salario_code                            # 157-164: Tipo salario
                     )
-                    data = [""] * 14
-                    data[0] = line.name.employer_register.name
-                    data[1] = line.name.ssnid.zfill(11)
-                    data[2] = str(line.name.address_home_id.vat).upper()
-                    data[3] = str(line.name.address_home_id.curp).upper()
-                    data[4] = (
-                        str(line.name.lastname).upper()
-                        + "$"
-                        + str(line.name.second_lastname).upper()
-                        + "$"
-                        + str(line.name.firstname).upper()
-                        + (" " * (48 - len_name))
-                    )
-                    data[5] = "1"
-                    data[6] = "0"
-                    data[7] = (
-                        str(line.contract_id.date_start.strftime("%d"))
-                        + str(line.contract_id.date_start.strftime("%m"))
-                        + str(line.contract_id.date_start.strftime("%Y"))
-                    )
-                    data[8] = (
-                        format(line.name.contract_id.sdi, ".2f")
-                        .replace(".", "")
-                        .zfill(7)
-                    )
-                    data[9] = line.name.employee_number.zfill(17)
-                    data[10] = " " * 10
-                    data[11] = "0" * 8
-                    data[12] = "0"
-                    data[13] = "0" * 8
-
-                    lines += "".join(str(d) for d in data) + "\n"
+                    
+                    lines += record + "\n"
 
                 self.txt_file = base64.b64encode(lines.encode("cp1252"))
                 return {
