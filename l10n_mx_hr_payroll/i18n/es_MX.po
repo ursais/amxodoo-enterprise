@@ -6,14 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20230816\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-24 21:26+0000\n"
-"PO-Revision-Date: 2024-06-24 21:26+0000\n"
+"POT-Creation-Date: 2026-05-01 22:58+0000\n"
+"PO-Revision-Date: 2026-05-01 17:10-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: es_MX\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
 
 #. module: l10n_mx_hr_payroll
 #: model:mail.template,subject:l10n_mx_hr_payroll.mail_template_new_mx_payslip
@@ -202,8 +204,8 @@ msgstr "<span>Info extra</span>"
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.report_payslip_cfdi_mx
 msgid "<span>Original chain complement of digital certification SAT</span>"
 msgstr ""
-"<span>Complemento original de la cadena del certificado digital del "
-"SAT</span>"
+"<span>Complemento original de la cadena del certificado digital del SAT</"
+"span>"
 
 #. module: l10n_mx_hr_payroll
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.report_payslip_cfdi_mx
@@ -278,7 +280,8 @@ msgstr ""
 #. module: l10n_mx_hr_payroll
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.report_payslip_cfdi_mx
 msgid "<strong>This document is a printed representation of a CFDI</strong>"
-msgstr "<strong>Este documento es una representación impresa de un CFDI</strong>"
+msgstr ""
+"<strong>Este documento es una representación impresa de un CFDI</strong>"
 
 #. module: l10n_mx_hr_payroll
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.report_payslip_cfdi_mx
@@ -303,9 +306,11 @@ msgstr "<strong>Horario laboral</strong>"
 #. module: l10n_mx_hr_payroll
 #: model:mail.template,body_html:l10n_mx_hr_payroll.mail_template_new_mx_payslip
 msgid ""
-"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%; margin:0px auto;\"><tbody>\n"
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%; "
+"margin:0px auto;\"><tbody>\n"
 "    <tr><td valign=\"top\" style=\"text-align: left; font-size: 14px;\">\n"
-"        Dear ${object.employee_id.name}, a new payslip is available for you.<br><br>\n"
+"        Dear ${object.employee_id.name}, a new payslip is available for you."
+"<br><br>\n"
 "        Please find the PDF  and XML in attachment.<br><br>\n"
 "        Have a nice day,<br>\n"
 "        The HR Team\n"
@@ -313,15 +318,23 @@ msgid ""
 "</tbody></table>\n"
 "            "
 msgstr ""
-"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%; margin:0px auto;\"><tbody>\n"
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%; "
+"margin:0px auto;\"><tbody>\n"
 "    <tr><td valign=\"top\" style=\"text-align: left; font-size: 14px;\">\n"
-"        Estimado ${object.employee_id.name}, Un nuevo recibo está disponible para usted.<br><br>\n"
+"        Estimado ${object.employee_id.name}, Un nuevo recibo está "
+"disponible para usted.<br><br>\n"
 "        Puede encontrar el PDF y el XML en los adjuntos.<br><br>\n"
 "        Tenga un lindo días,<br>\n"
 "        El equipo de RR.HH\n"
 "    </td></tr>\n"
 "</tbody></table>\n"
 "            "
+
+#. module: l10n_mx_hr_payroll
+#: model:ir.model.constraint,message:l10n_mx_hr_payroll.constraint_hr_payroll_es_unique_type_table_date
+#: model:ir.model.constraint,message:l10n_mx_hr_payroll.constraint_hr_payroll_isr_unique_type_table_date
+msgid "A record with this type and date already exists."
+msgstr "Un registro con este tipo y fecha ya existe."
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.actions.act_window,name:l10n_mx_hr_payroll.hr_leave_action_holiday_absences
@@ -533,7 +546,7 @@ msgstr "Percepción / Deducción ( SAT )"
 #. module: l10n_mx_hr_payroll
 #: model:hr.salary.rule.category,name:l10n_mx_hr_payroll.CAT_ALW_C
 msgid "Allowance Cash"
-msgstr "Percepción en Efectivo"
+msgstr "Percepción en efectivo"
 
 #. module: l10n_mx_hr_payroll
 #: model:hr.salary.rule.category,name:l10n_mx_hr_payroll.CAT_ALW_S
@@ -564,7 +577,7 @@ msgstr "Tipo de Percepción para México"
 #. module: l10n_mx_hr_payroll
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_salary_rule__exemption
 msgid "Allowance with exemption for ISR"
-msgstr "Percepción con excento para ISR"
+msgstr "Percepción con exento para ISR"
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_alimony_line__amount
@@ -613,22 +626,17 @@ msgid "Annual extraordinary"
 msgstr "Extraordinario anual"
 
 #. module: l10n_mx_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_payroll_isr__type_table__a
+msgid "Annually"
+msgstr "Anual"
+
+#. module: l10n_mx_hr_payroll
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_contract__antiquity
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_contract_process__antiquity
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_pc_line__antiquity
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_settlements__antiquity
 msgid "Antiquity"
 msgstr "Antigüedad"
-
-#. module: l10n_mx_hr_payroll
-#: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_payroll_es__type_table__a
-msgid "Anual"
-msgstr ""
-
-#. module: l10n_mx_hr_payroll
-#: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_payroll_isr__type_table__a
-msgid "Anually"
-msgstr "Anual"
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_contract_salary_history__state__applied
@@ -814,6 +822,11 @@ msgid "Auxiliares"
 msgstr ""
 
 #. module: l10n_mx_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_salary_rule__reporting_category__basic
+msgid "BASIC"
+msgstr ""
+
+#. module: l10n_mx_hr_payroll
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.view_hr_payroll_extratime_form
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.view_hr_payroll_idse_reports_form
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.view_hr_payroll_sua_reports_form
@@ -908,7 +921,7 @@ msgstr ""
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_res_partner__curp
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_res_users__curp
 #: model:ir.model.fields,help:l10n_mx_hr_payroll.field_res_partner__curp
@@ -1403,7 +1416,7 @@ msgstr "Datos"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_bonus_process__date
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_contract_salary_history__date
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_alimony_line__date
@@ -1412,10 +1425,12 @@ msgstr "Datos"
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_idse_reports_line__date
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_loan_line__date
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_ms__date
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_sua_html_report__date
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_sua_reports_line__date
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_uma__date
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_umi__date
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_ptu_process__date
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_report_l10n_mx_hr_payroll_report_idse__date
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.view_hr_payroll_salary_history_form
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.view_hr_payroll_salary_increases_form
 #, python-format
@@ -1726,6 +1741,13 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: l10n_mx_hr_payroll
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_es__date
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_isr__date
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_pc__date
+msgid "Effective after"
+msgstr "Efectivo después del"
+
+#. module: l10n_mx_hr_payroll
 #: model:ir.model,name:l10n_mx_hr_payroll.model_hr_employee
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_contract_process__employee_id
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_contract_salary_history__employee_id
@@ -1737,6 +1759,8 @@ msgstr "Borrador"
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_salary_increases__employee_id
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_saving_fund__employee_id
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_settlements__employee_id
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_sua_html_report__employee_id
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_report_l10n_mx_hr_payroll_report_idse__employee_id
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.view_hr_payroll_alimony_filter
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.view_hr_payroll_imss_form_view
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.view_hr_payroll_loan_filter
@@ -1748,7 +1772,7 @@ msgstr "Empleado"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #, python-format
 msgid "Employee Code"
 msgstr "Código de empleado"
@@ -1785,7 +1809,9 @@ msgstr "Régimen del Empleado"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_sua_html_report__employee_type
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_report_l10n_mx_hr_payroll_report_idse__employee_type
 #, python-format
 msgid "Employee Type"
 msgstr "Tipo de empleado"
@@ -1816,12 +1842,14 @@ msgstr "Empleador"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
 #: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_sua.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #: model:ir.actions.act_window,name:l10n_mx_hr_payroll.action_view_hr_payroll_employer_register
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_employee__employer_register
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_employee_base__employer_register
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_employee_public__employer_register
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_sua_html_report__name
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_report_l10n_mx_hr_payroll_report_idse__name
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_res_company__hr_payroll_employer_registers
 #: model:ir.ui.menu,name:l10n_mx_hr_payroll.menu_hr_payroll_employer_register_view
 #, python-format
@@ -1913,15 +1941,15 @@ msgstr "Parte exenta por día"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #, python-format
 msgid "Export (XLSX)"
 msgstr "Exportar (XLSX)"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
 #: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_sua.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #, python-format
 msgid "Export IMSS (TXT)"
 msgstr "Exportar IMSS ( TXT )"
@@ -2134,6 +2162,11 @@ msgid "Fortnightly"
 msgstr "Catorcenal"
 
 #. module: l10n_mx_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_salary_rule__reporting_category__gross
+msgid "GROSS"
+msgstr ""
+
+#. module: l10n_mx_hr_payroll
 #: model:hr.salary.rule,name:l10n_mx_hr_payroll.hr_salary_rule_p207_settlement
 msgid "Gatificación"
 msgstr ""
@@ -2177,7 +2210,7 @@ msgstr "Recibos Generados"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #, python-format
 msgid "Guia"
 msgstr "Guía"
@@ -2308,7 +2341,7 @@ msgstr "Identificación"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #: model:ir.ui.menu,name:l10n_mx_hr_payroll.hr_payroll_report_root_idse
 #, python-format
 msgid "IDSE"
@@ -2320,6 +2353,11 @@ msgid "IDSE ( txt)"
 msgstr ""
 
 #. module: l10n_mx_hr_payroll
+#: model:ir.model,name:l10n_mx_hr_payroll.model_report_l10n_mx_hr_payroll_report_idse
+msgid "IDSE (IMSS) Report"
+msgstr ""
+
+#. module: l10n_mx_hr_payroll
 #. odoo-python
 #: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_sua.py:0
 #, python-format
@@ -2328,20 +2366,20 @@ msgstr ""
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #, python-format
 msgid "IDSE (report)"
 msgstr "IDSE (reporte)"
 
 #. module: l10n_mx_hr_payroll
-#: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_payroll_idse_reports__report_type__baja
-msgid "IDSE Deregistration"
-msgstr "IDSE Baja"
+#: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_payroll_idse_reports__report_type__alta
+msgid "IDSE Alta"
+msgstr ""
 
 #. module: l10n_mx_hr_payroll
-#: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_payroll_idse_reports__report_type__alta
-msgid "IDSE Registration"
-msgstr "IDSE Alta"
+#: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_payroll_idse_reports__report_type__baja
+msgid "IDSE Baja"
+msgstr ""
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.actions.act_window,name:l10n_mx_hr_payroll.hr_payroll_idse_reports
@@ -2351,7 +2389,7 @@ msgstr "Reportes IDSE"
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_payroll_idse_reports__report_type__mod_wage
-msgid "IDSE Salary Modification"
+msgid "IDSE modificacion Salarial"
 msgstr "Modificación de Salario IDSE"
 
 #. module: l10n_mx_hr_payroll
@@ -2423,6 +2461,46 @@ msgstr "Percepción variable IMSS"
 #: model:ir.ui.menu,name:l10n_mx_hr_payroll.menu_hr_payroll_isr_view
 msgid "ISR"
 msgstr ""
+
+#. module: l10n_mx_hr_payroll
+#: model:hr.payroll.isr,name:l10n_mx_hr_payroll.table_of_isr_quincenal_1121
+msgid "ISR 2024 - Biweekly"
+msgstr "ISR 2024 - Quincenal"
+
+#. module: l10n_mx_hr_payroll
+#: model:hr.payroll.isr,name:l10n_mx_hr_payroll.table_of_isr_monthly_0521
+msgid "ISR 2024 - Monthly"
+msgstr "ISR 2024 - Mensual"
+
+#. module: l10n_mx_hr_payroll
+#: model:hr.payroll.isr,name:l10n_mx_hr_payroll.table_of_isr_weekly_0521
+msgid "ISR 2024 - Weekly"
+msgstr "ISR 2024 - Semanal"
+
+#. module: l10n_mx_hr_payroll
+#: model:hr.payroll.isr,name:l10n_mx_hr_payroll.table_of_isr_anual_0524
+msgid "ISR 2024 - Yearly"
+msgstr "ISR 2024 - Anual"
+
+#. module: l10n_mx_hr_payroll
+#: model:hr.payroll.isr,name:l10n_mx_hr_payroll.table_of_isr_biweekly_26
+msgid "ISR 2026 - Biweekly"
+msgstr "ISR 2026 - Quincenal"
+
+#. module: l10n_mx_hr_payroll
+#: model:hr.payroll.isr,name:l10n_mx_hr_payroll.table_of_isr_monthly_26
+msgid "ISR 2026 - Monthly"
+msgstr "ISR 2026 - Mensual"
+
+#. module: l10n_mx_hr_payroll
+#: model:hr.payroll.isr,name:l10n_mx_hr_payroll.table_of_isr_weekly_26
+msgid "ISR 2026 - Weekly"
+msgstr "ISR 2026 - Semanal"
+
+#. module: l10n_mx_hr_payroll
+#: model:hr.payroll.isr,name:l10n_mx_hr_payroll.table_of_isr_yearly_26
+msgid "ISR 2026 - Yearly"
+msgstr "ISR 2026 - Anual"
 
 #. module: l10n_mx_hr_payroll
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.hr_salary_rule_form_inherit_payroll_mx
@@ -2657,8 +2735,8 @@ msgstr "Integra para el PTU"
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_salary_rule__integer_income
-msgid "Entero para ingresos como asignación"
-msgstr "Entero para "
+msgid "Integer for income like allowance"
+msgstr ""
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_salary_rule__integer_state
@@ -2746,7 +2824,7 @@ msgstr "Valor de riesgo laboral"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_contract__journal_type
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_contract_salary_history__journal_type
 #, python-format
@@ -3224,9 +3302,14 @@ msgid "NA"
 msgstr ""
 
 #. module: l10n_mx_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_salary_rule__reporting_category__net
+msgid "NET"
+msgstr ""
+
+#. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
 #: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_sua.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_idse_reports_line__ssnid
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_sua_reports_line__ssnid
 #, python-format
@@ -3265,26 +3348,11 @@ msgstr "Nombre"
 #. module: l10n_mx_hr_payroll
 #. odoo-python
 #: code:addons/l10n_mx_hr_payroll/models/hr_bonus_process.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_bonus_process.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_bonus_process.py:0
 #: code:addons/l10n_mx_hr_payroll/models/hr_contract_process.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_contract_process.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_contract_process.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_contract_process.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_contract_process.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_contract_process.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_alimony.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_alimony.py:0
 #: code:addons/l10n_mx_hr_payroll/models/hr_payroll_alimony.py:0
 #: code:addons/l10n_mx_hr_payroll/models/hr_payroll_extratime.py:0
 #: code:addons/l10n_mx_hr_payroll/models/hr_payroll_salary_increases.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_salary_increases.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_salary_increases.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_salary_increases.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_salary_increases.py:0
 #: code:addons/l10n_mx_hr_payroll/models/hr_payroll_settlements.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_ptu_process.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_ptu_process.py:0
 #: code:addons/l10n_mx_hr_payroll/models/hr_ptu_process.py:0
 #, python-format
 msgid "New"
@@ -3436,7 +3504,6 @@ msgstr "Tipo de la siguiente actividad"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/models/hr_employee.py:0
 #: code:addons/l10n_mx_hr_payroll/models/hr_employee.py:0
 #, python-format
 msgid "No name set."
@@ -3730,7 +3797,7 @@ msgstr ""
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #, python-format
 msgid "PDF"
 msgstr ""
@@ -3894,7 +3961,14 @@ msgstr "La pensión alimenticia cambió <b>%s</b> al estado de Borrador"
 msgid ""
 "Payroll Alimony with folio <b>%(alimony.name)s</b> has been changed "
 "<b>%(status)s</b> to Approve status"
-msgstr "La pensión alimenticia cambió <b>%(alimony.name)s</b> al estado Aprobado "
+msgstr ""
+"La pensión alimenticia <b>%(alimony.name)s</b> cambió del estado "
+"<b>%(status)s</b> a Aprobado"
+
+#. module: l10n_mx_hr_payroll
+#: model:ir.model,name:l10n_mx_hr_payroll.model_hr_payroll_report
+msgid "Payroll Analysis Report"
+msgstr "Reporte del análisis de la nómina"
 
 #. module: l10n_mx_hr_payroll
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.view_hr_payroll_bonus_process_form
@@ -3935,11 +4009,6 @@ msgid "Payroll Dispersion"
 msgstr "Dispersión de Nómina"
 
 #. module: l10n_mx_hr_payroll
-#: model:ir.model,name:l10n_mx_hr_payroll.model_hr_payroll_es
-msgid "Payroll Employement Subsidy Table"
-msgstr "Tabla de Subsidio al Empleo de Nómina"
-
-#. module: l10n_mx_hr_payroll
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.view_hr_payroll_employer_register_form_view
 msgid "Payroll Employer Register"
 msgstr "Registro de Empleador de Nómina"
@@ -3957,6 +4026,7 @@ msgstr "Subsidio al Empleo de Nómina"
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.actions.act_window,name:l10n_mx_hr_payroll.action_view_hr_payroll_es_list_form
+#: model:ir.model,name:l10n_mx_hr_payroll.model_hr_payroll_es
 msgid "Payroll Employment Subsidy Table"
 msgstr "Tabla de Subsidio al Empleo de Nómina"
 
@@ -3981,7 +4051,8 @@ msgstr "Línea de Tiempo Extra de Nómina"
 #, python-format
 msgid ""
 "Payroll General Salary Increase has been changed <b>%s</b> to Cancel status"
-msgstr "Incremento de Salario General de Nómina cambió <b>%s</b> al estado Cancelado"
+msgstr ""
+"Incremento de Salario General de Nómina cambió <b>%s</b> al estado Cancelado"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
@@ -3989,7 +4060,8 @@ msgstr "Incremento de Salario General de Nómina cambió <b>%s</b> al estado Can
 #, python-format
 msgid ""
 "Payroll General Salary Increase has been changed <b>%s</b> to Draft status"
-msgstr "Incremento de Salario General de Nómina cambió <b>%s</b> al estado Borrador"
+msgstr ""
+"Incremento de Salario General de Nómina cambió <b>%s</b> al estado Borrador"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
@@ -3997,7 +4069,8 @@ msgstr "Incremento de Salario General de Nómina cambió <b>%s</b> al estado Bor
 #, python-format
 msgid ""
 "Payroll General Salary Increase has been changed<b>%s</b> to Cancel status"
-msgstr "Incremento de Salario General de Nómina cambió <b>%s</b> al estado Cancelado"
+msgstr ""
+"Incremento de Salario General de Nómina cambió <b>%s</b> al estado Cancelado"
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.model,name:l10n_mx_hr_payroll.model_hr_payroll_general_salary_increases
@@ -4006,22 +4079,14 @@ msgstr "Incrementos Generales de Salario de Nómina"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_idse_process.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_idse_process.py:0
+#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_idse_reports.py:0
 #, python-format
 msgid "Payroll IDSE Report has been Calculated"
 msgstr "Reporte de Nómina IDSE ha sido calculado"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_idse_process.py:0
-#, python-format
-msgid "Payroll IDSE Report has been Cancelled"
-msgstr "Reporte de Nómina IDSE ha sido cancelado"
-
-#. module: l10n_mx_hr_payroll
-#. odoo-python
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_idse_process.py:0
+#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_idse_reports.py:0
 #, python-format
 msgid "Payroll IDSE Report has been draft"
 msgstr "Reporte de Nómina IDSE se ha hecho como borrador"
@@ -4137,9 +4202,10 @@ msgstr "Proceso de Nómina PTU cambió <b>%s</b> al estado Borrador"
 #: code:addons/l10n_mx_hr_payroll/models/hr_ptu_process.py:0
 #, python-format
 msgid ""
-"Payroll PTU Process with folio <b>%(ptu_process.name)s</b>"
-"                        has been changed to Approve status"
-msgstr "Proceso de Nómina PTU cambió <b>%s</b> al estado Aprobado"
+"Payroll PTU Process with folio <b>%(ptu_process.name)s</"
+"b>                        has been changed to Approve status"
+msgstr ""
+"El proceso de PTU <b>%(ptu_process.name)s</b> cambió al estado Aprobado"
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.actions.act_window,name:l10n_mx_hr_payroll.action_view_hr_payroll_pc_list_form
@@ -4195,11 +4261,10 @@ msgstr "Procesos de Nómina"
 #. module: l10n_mx_hr_payroll
 #. odoo-python
 #: code:addons/l10n_mx_hr_payroll/models/hr_contract_process.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_contract_process.py:0
 #, python-format
 msgid ""
-"Payroll Process Contract  with folio <b>%(process.name)s</b>"
-"                        has been changed to Approve status"
+"Payroll Process Contract  with folio <b>%(process.name)s</"
+"b>                        has been changed to Approve status"
 msgstr ""
 
 #. module: l10n_mx_hr_payroll
@@ -4207,11 +4272,11 @@ msgstr ""
 #: code:addons/l10n_mx_hr_payroll/models/hr_contract_process.py:0
 #, python-format
 msgid ""
-"Payroll Process Contract  with folio <b>%(process.name)s</b>"
-"                        has been changed to Draft status"
+"Payroll Process Contract  with folio <b>%(process.name)s</"
+"b>                        has been changed to Draft status"
 msgstr ""
-"El Proceso de Contrato de Nómina cambió <b>%(process.name)s</b>"
-"                        al estado Borrador"
+"El Proceso de Contrato de Nómina cambió <b>%(process.name)s</"
+"b>                        al estado Borrador"
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.model,name:l10n_mx_hr_payroll.model_hr_contract_restday
@@ -4220,22 +4285,21 @@ msgstr "Días de descanso"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_sua_process.py:0
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_sua_process.py:0
+#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_sua_reports.py:0
 #, python-format
 msgid "Payroll SUA Report has been Calculated"
 msgstr "El reporte de Nómina SUA se ha calculado"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_sua_process.py:0
+#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_sua_reports.py:0
 #, python-format
 msgid "Payroll SUA Report has been Cancelled"
 msgstr "El reporte de Nómina SUA se ha cancelado"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_sua_process.py:0
+#: code:addons/l10n_mx_hr_payroll/models/hr_payroll_sua_reports.py:0
 #, python-format
 msgid "Payroll SUA Report has been draft"
 msgstr "El reporte de Nómina SUA se ha creado como borrador"
@@ -4699,7 +4763,7 @@ msgstr ""
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #, python-format
 msgid "Print Preview"
 msgstr "Imprimir Vista Previa"
@@ -4801,6 +4865,12 @@ msgid "Report Type"
 msgstr "Tipo de reporte"
 
 #. module: l10n_mx_hr_payroll
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payslip_line__reporting_category
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_salary_rule__reporting_category
+msgid "Reporting Category"
+msgstr ""
+
+#. module: l10n_mx_hr_payroll
 #: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_payroll_settlements__reason_for_dismissal__rescission
 msgid "Rescission"
 msgstr "Rescisión"
@@ -4893,7 +4963,7 @@ msgstr ""
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_contract__sbc
 #, python-format
 msgid "SBC"
@@ -4959,6 +5029,11 @@ msgid "SUA"
 msgstr ""
 
 #. module: l10n_mx_hr_payroll
+#: model:ir.model,name:l10n_mx_hr_payroll.model_hr_payroll_sua_html_report
+msgid "SUA ( IMSS ) Report"
+msgstr ""
+
+#. module: l10n_mx_hr_payroll
 #: model_terms:ir.ui.view,arch_db:l10n_mx_hr_payroll.view_hr_payroll_sua_reports_form
 msgid "SUA ( txt)"
 msgstr "SUA (txt)"
@@ -4984,11 +5059,11 @@ msgstr "Reportes SUA"
 #: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_employee_base__l10n_mx_hr_payroll_fiscal_regime__02
 #: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_employee_public__l10n_mx_hr_payroll_fiscal_regime__02
 msgid ""
-"Salaries (Includes income specified in section I of article 94 of the Income"
-" Tax Law)"
+"Salaries (Includes income specified in section I of article 94 of the "
+"Income Tax Law)"
 msgstr ""
-"Salarios (Incluye los ingresos señalados en la sección I del artículo 94 de la Ley de Rentas"
-" Ley de Impuestos)"
+"Salarios (Incluye los ingresos señalados en la sección I del artículo 94 de "
+"la Ley de Rentas Ley de Impuestos)"
 
 #. module: l10n_mx_hr_payroll
 #: model:hr.salary.rule,name:l10n_mx_hr_payroll.hr_salary_rule_biweekly_1000
@@ -5068,7 +5143,7 @@ msgstr "Estructura salarial"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_contract__salary_type
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_contract_salary_history__salary_type
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_salary_increases__salary_type
@@ -5101,6 +5176,12 @@ msgstr "Tipo de salario"
 #: model:ir.ui.menu,name:l10n_mx_hr_payroll.menu_hr_payroll_process_saving_fund
 msgid "Saving Fund"
 msgstr "Fondo de Ahorro"
+
+#. module: l10n_mx_hr_payroll
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_sua_html_report__sbc
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_report_l10n_mx_hr_payroll_report_idse__sbc
+msgid "Sbc"
+msgstr ""
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_contract__contract_type__04
@@ -5432,8 +5513,9 @@ msgid ""
 "There's no contract set on payslip %(name)s for %(employee_id.name)s.Check "
 "that there is at least a contract set on the employee form."
 msgstr ""
-"No hay ningún contrato establecido en el recibo de sueldo %(name)s para %(employee_id.name)s.Check "
-"que haya al menos un contrato establecido en el formulario del empleado"
+"No hay ningún contrato establecido en el recibo de sueldo %(name)s para "
+"%(employee_id.name)s.Check que haya al menos un contrato establecido en el "
+"formulario del empleado"
 
 #. module: l10n_mx_hr_payroll
 #: model_terms:ir.actions.act_window,help:l10n_mx_hr_payroll.payroll_report_Loans_mx_action
@@ -5522,6 +5604,11 @@ msgstr "Deducciones totales"
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_movement_line__total_amount
 msgid "Total Import"
 msgstr "Importe total"
+
+#. module: l10n_mx_hr_payroll
+#: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_employee__total_overtime
+msgid "Total Overtime"
+msgstr "Total de horas adicionales"
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_loan__total_paid
@@ -5638,8 +5725,8 @@ msgstr "Tabla de UMA"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
 #: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_sua.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #, python-format
 msgid "UMF"
 msgstr ""
@@ -5843,7 +5930,7 @@ msgstr "Días trabajados proporcional"
 #. module: l10n_mx_hr_payroll
 #: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_payroll_structure__type_use__ptu
 msgid "Workers' profit sharing (PTU)"
-msgstr "Reparto de utilidades a los trabajadores (PTU)
+msgstr "Reparto de utilidades a los trabajadores (PTU"
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_contract_process__resource_calendar_id
@@ -5852,13 +5939,14 @@ msgstr "Calendario"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #, python-format
 msgid "XLSX"
 msgstr ""
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_uma__yearly
+#: model:ir.model.fields.selection,name:l10n_mx_hr_payroll.selection__hr_payroll_es__type_table__a
 msgid "Yearly"
 msgstr "Anual"
 
@@ -5936,33 +6024,35 @@ msgstr "Necesitas definir un valor mas grande que %s"
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #, python-format
 msgid ""
 "You need to set the Journal type for employee (%(record.employee_id.name)s)"
-msgstr "Necesitas establecer el tipo de registro para el empleado (%(record.employee_id.name)s)."
+msgstr ""
+"Necesitas establecer el tipo de registro para el empleado "
+"(%(record.employee_id.name)s)."
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #, python-format
 msgid ""
 "You need to set the contract type for the employee "
 "(%(record.employee_id.name)s)."
 msgstr ""
-"Necesitas establecer el tipo de contrato para el empleado"
-"(%(record.employee_id.name)s)."
+"Necesitas establecer el tipo de contrato para el "
+"empleado(%(record.employee_id.name)s)."
 
 #. module: l10n_mx_hr_payroll
 #. odoo-python
-#: code:addons/l10n_mx_hr_payroll/reports/hr_payroll_idse_baja.py:0
+#: code:addons/l10n_mx_hr_payroll/reports/report_l10n_mx_hr_payroll_report_idse.py:0
 #, python-format
 msgid ""
 "You need to set the salary type for the employee "
 "(%(record.employee_id.name)s)."
 msgstr ""
-"Necesitas establecer el tipo de salario para el empleado"
-"(%(record.employee_id.name)s)."
+"Necesitas establecer el tipo de salario para el "
+"empleado(%(record.employee_id.name)s)."
 
 #. module: l10n_mx_hr_payroll
 #: model:ir.model.fields,field_description:l10n_mx_hr_payroll.field_hr_payroll_employer_register__zip

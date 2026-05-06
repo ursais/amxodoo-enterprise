@@ -8,6 +8,7 @@
             <tree>
                 <field name="code" />
                 <field name="name" />
+                <field name="date" />
             </tree>
         </field>
     </record>
@@ -24,6 +25,9 @@
                         <field name="code" />
                         <field name="name" />
                         <field name="type_table" />
+                    </group>
+                    <group>
+                        <field name="date" />
                     </group>
                 </group>
                 <notebook>

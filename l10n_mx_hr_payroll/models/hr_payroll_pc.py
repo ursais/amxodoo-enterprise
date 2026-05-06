@@ -8,6 +8,7 @@ class HrPayrollPc(models.Model):
 
     code = fields.Char(required=True)
     name = fields.Char(required=True)
+    date = fields.Date(string="Effective after", required=True)
     active = fields.Boolean(default=True)
     line_ids = fields.One2many("hr.payroll.pc.line", "line_id", string="Lines")
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company)

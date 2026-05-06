@@ -65,7 +65,7 @@
                                 <tree>
                                     <field name="date" />
                                     <field name="name" />
-                                    <field name="ssnid" />
+
                                 </tree>
                             </field>
                         </page>

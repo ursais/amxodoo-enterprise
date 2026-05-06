@@ -87,6 +87,20 @@ class HrPayrollSUAReports(models.Model):
             sua.message_post(body=_("Payroll SUA Report has been Cancelled"))
             return True
 
+    def _create_contract_lines(self, sua, contract_ids):
+        sua.line_ids.unlink()
+        for contract_id in contract_ids:
+            self.env["hr.payroll.sua.reports.line"].create(
+                {
+                    "line_id": sua.id,
+                    "date": fields.Date.context_today(self),
+                    "name": contract_id.employee_id.id,
+                    "contract_id": contract_id.id,
+                    "ssnid": contract_id.employee_id.ssnid,
+                    "company_id": sua.company_id.id,
+                }
+            )
+
     def sua_calculate(self):
         for sua in self:
             sua.state = "calculated"
@@ -105,18 +119,7 @@ class HrPayrollSUAReports(models.Model):
                         ("company_id", "=", sua.company_id.id),
                     ]
                 )
-                sua.line_ids.unlink()
-                for contract_id in contract_ids:
-                    line = self.env["hr.payroll.sua.reports.line"].create(
-                        {
-                            "line_id": sua.id,
-                            "date": fields.Date.context_today(self),
-                            "name": contract_id.employee_id.id,
-                            "contract_id": contract_id.id,
-                            "ssnid": contract_id.employee_id.ssnid,
-                            "company_id": sua.company_id.id,
-                        }
-                    )
+                self._create_contract_lines(sua, contract_ids)
             elif sua.report_type == "movt":
                 self.movements(sua)
             else:
@@ -190,7 +193,6 @@ class HrPayrollSUAReports(models.Model):
                     ("company_id", "=", sua.company_id.id),
                 ]
             )
-            sua.line_ids.unlink()
             if contract_ids and contract_olders_ids:
                 for contract_id in contract_ids:
                     self.env["hr.payroll.sua.reports.line"].create(

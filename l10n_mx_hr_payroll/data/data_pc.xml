@@ -3,6 +3,7 @@
     <record id="table_of_pc_employee_anual_0521" model="hr.payroll.pc">
         <field name="code">PC - Employees</field>
         <field name="name">Performance Catalog for employees</field>
+        <field name="date">2021-05-01</field>
     </record>
 
     <record id="hr_payroll_pc_employee_anual_0521_line001" model="hr.payroll.pc.line">
