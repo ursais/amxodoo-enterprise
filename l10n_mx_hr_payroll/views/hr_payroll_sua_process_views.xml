@@ -27,11 +27,19 @@
                         type='object'
                     />
                     <button
-                        string="SUA ( txt)"
+                        string="SUA (txt)"
                         name="sua_txt"
                         class="oe_highlight"
                         states="done,calculated"
                         type='object'
+                    />
+                    <button
+                        string="Afiliación (txt)"
+                        name="afilacion_txt"
+                        class="oe_highlight"
+                        states="done,calculated"
+                        type='object'
+                        attrs="{'invisible': [('report_type', '!=', 'alta')]}"
                     />
                     <button
                         string="Back to Draft"
