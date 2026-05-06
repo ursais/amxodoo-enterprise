@@ -279,8 +279,10 @@ class HrPayrollSUAReports(models.Model):
                 file_name = "aseg.txt"
             elif sua.report_type == "movt" and sua.movt_type == "02":
                 file_name = "baja.txt"
-            else:
+            elif sua.report_type == "movt" and sua.movt_type == "07":
                 file_name = "movimiento.txt"
+            elif sua.report_type == "movt" and sua.movt_type == "08":
+                file_name = "reingreso.txt"
 
             for line in self.line_ids:
                 contract = line.contract_id
@@ -347,6 +349,113 @@ class HrPayrollSUAReports(models.Model):
                         + empty_spaces  # 29-32: Deregistration year
                         + fixed_zeros  # 33-40: Empty spaces  # 41-49: Fixed zeros
                     )
+                elif sua.report_type == "movt" and sua.movt_type == "07":
+                    # Salary change (movt_type 07) format (49 characters total)
+                    # 1-11: Employer Register (11 chars)
+                    # 12-22: NSS (11 chars) - If 10 digits → "0"&NSS; if 11 → as is
+                    # 23-24: Movement code (2 chars) - FIJO "07"
+                    # 25-26: Day of modification (2 chars) - DD
+                    # 27-28: Month of modification (2 chars) - MM
+                    # 29-32: Year of modification (4 chars) - YYYY
+                    # 33-40: Empty spaces (8 chars)
+                    # 41-42: Fixed zeros (2 chars) - "00"
+                    # 43-47: Salary integer (5 chars)
+                    # 48-49: Salary decimals (2 chars)
+
+                    # Movement code - hardcoded as "07"
+                    movement_code = "07"
+
+                    # Get date components from line.date
+                    if line.date:
+                        modification_date = line.date
+                    else:
+                        modification_date = fields.Date.context_today(self)
+
+                    day = str(modification_date.day).zfill(2)
+                    month = str(modification_date.month).zfill(2)
+                    year = str(modification_date.year)[-4:]
+
+                    # Empty spaces (8 chars)
+                    empty_spaces = " " * 8
+
+                    # Fixed zeros (2 chars)
+                    fixed_zeros_2 = "00"
+
+                    # Get salary from contract
+                    sdi = contract.sdi or 0.0
+                    sdi_integer = int(sdi)
+                    sdi_decimal = int(round((sdi - sdi_integer) * 100))
+
+                    # Format salary: integer (5 digits) + decimals (2 chars)
+                    salary_integer = str(sdi_integer).zfill(5)[-5:]
+                    salary_decimals = str(sdi_decimal).zfill(2)[-2:]
+
+                    record = (
+                        employer_register_padded  # 1-11: Employer Register (11 chars)
+                        + nss_padded  # 12-22: NSS (11 chars)
+                        + movement_code  # 23-24: Movement code "07" (2 chars)
+                        + day  # 25-26: Day of modification (2 chars)
+                        + month  # 27-28: Month of modification (2 chars)
+                        + year  # 29-32: Year of modification (4 chars)
+                        + empty_spaces  # 33-40: Empty spaces (8 chars)
+                        + fixed_zeros_2  # 41-42: Fixed zeros "00" (2 chars)
+                        + salary_integer  # 43-47: Salary integer (5 chars)
+                        + salary_decimals  # 48-49: Salary decimals (2 chars)
+                    )  # Total: 49 characters
+                elif sua.report_type == "movt" and sua.movt_type == "08":
+                    # Re-registration (movt_type 08) format (49 characters total)
+                    # 1-11: Employer Register (11 chars)
+                    # 12-22: NSS (11 chars) - If 10 digits → "0"&NSS; if 11 → as is
+                    # 23-24: Movement code (2 chars) - FIJO "08"
+                    # 25-26: Day of re-registration (2 chars) - DD
+                    # 27-28: Month of re-registration (2 chars) - MM
+                    # 29-32: Year of re-registration (4 chars) - YYYY
+                    # 33-40: Empty spaces (8 chars)
+                    # 41-42: Fixed zeros (2 chars) - "00"
+                    # 43-47: Salary integer (5 chars)
+                    # 48-49: Salary decimals (2 chars)
+
+                    # Movement code - hardcoded as "08"
+                    movement_code = "08"
+
+                    # Get date components from line.date
+                    if line.date:
+                        reregistration_date = line.date
+                    else:
+                        reregistration_date = fields.Date.context_today(self)
+
+                    day = str(reregistration_date.day).zfill(2)
+                    month = str(reregistration_date.month).zfill(2)
+                    year = str(reregistration_date.year)[-4:]
+
+                    # Empty spaces (8 chars)
+                    empty_spaces = " " * 8
+
+                    # Fixed zeros (2 chars)
+                    fixed_zeros_2 = "00"
+
+                    # Get salary from contract
+                    sdi = contract.sdi or 0.0
+                    sdi_integer = int(sdi)
+                    sdi_decimal = int(round((sdi - sdi_integer) * 100))
+
+                    # Format salary: integer (5 digits) + decimals (2 chars)
+                    salary_integer = str(sdi_integer).zfill(5)[-5:]
+                    salary_decimals = str(sdi_decimal).zfill(2)[-2:]
+
+                    record = (
+                        employer_register_padded  # 1-11: Employer Register (11 chars)
+                        + nss_padded  # 12-22: NSS (11 chars)
+                        + movement_code  # 23-24: Movement code "08" (2 chars)
+                        + day  # 25-26: Day of re-registration (2 chars)
+                        + month  # 27-28: Month of re-registration (2 chars)
+                        + year  # 29-32: Year of re-registration (4 chars)
+                        + empty_spaces  # 33-40: Empty spaces (8 chars)
+                        + fixed_zeros_2  # 41-42: Fixed zeros "00" (2 chars)
+                        + salary_integer  # 43-47: Salary integer (5 chars)
+                        + salary_decimals  # 48-49: Salary decimals (2 chars)
+                    )  # Total: 49 characters
+
                 else:
                     # Alta format (164 characters total)
                     # Get contract date components
