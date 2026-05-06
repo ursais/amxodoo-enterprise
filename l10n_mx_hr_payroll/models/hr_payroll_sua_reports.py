@@ -25,8 +25,6 @@ class HrPayrollSUAReports(models.Model):
             ("02", "Deregistration"),
             ("07", "Salary Modification"),
             ("08", "Reinstatement"),
-            ("11", "Absenteeism"),
-            ("12", "Incapacity"),
         ],
         default="02",
         string="Movement Type",
@@ -205,64 +203,6 @@ class HrPayrollSUAReports(models.Model):
                             "company_id": sua.company_id.id,
                         }
                     )
-        if sua.movt_type == "11":
-            sua.name = "SUA Report - Absenteeism"
-            timeoff_ids = self.env["hr.leave"].search(
-                [
-                    "&",
-                    "&",
-                    ("state", "=", "validate"),
-                    ("request_date_from", ">=", sua.date_start),
-                    ("request_date_to", "<=", sua.date_end),
-                ]
-            )
-            sua.line_ids.unlink()
-            if timeoff_ids:
-                for timeoff_id in timeoff_ids:
-                    if (
-                        timeoff_id.holiday_status_id.time_type == "leave"
-                        and not timeoff_id.holiday_status_id.disabilities_type
-                    ):
-                        self.env["hr.payroll.sua.reports.line"].create(
-                            {
-                                "line_id": sua.id,
-                                "date": timeoff_id.request_date_from,
-                                "name": timeoff_id.employee_id.id,
-                                "contract_id": False,
-                                "timeoff_id": timeoff_id.id,
-                                "ssnid": timeoff_id.employee_id.ssnid,
-                                "company_id": sua.company_id.id,
-                            }
-                        )
-        if sua.movt_type == "12":
-            sua.name = "SUA Report - Incapacity"
-            timeoff_ids = self.env["hr.leave"].search(
-                [
-                    "&",
-                    "&",
-                    ("state", "=", "validate"),
-                    ("request_date_from", ">=", sua.date_start),
-                    ("request_date_to", "<=", sua.date_end),
-                ]
-            )
-            sua.line_ids.unlink()
-            if timeoff_ids:
-                for timeoff_id in timeoff_ids:
-                    if (
-                        timeoff_id.holiday_status_id.time_type == "leave"
-                        and timeoff_id.holiday_status_id.disabilities_type
-                    ):
-                        self.env["hr.payroll.sua.reports.line"].create(
-                            {
-                                "line_id": sua.id,
-                                "date": timeoff_id.request_date_from,
-                                "name": timeoff_id.employee_id.id,
-                                "contract_id": False,
-                                "timeoff_id": timeoff_id.id,
-                                "ssnid": timeoff_id.employee_id.ssnid,
-                                "company_id": sua.company_id.id,
-                            }
-                        )
 
     def sua_back_to_draft(self):
         for sua in self:
@@ -793,15 +733,8 @@ class HrPayrollSUAReportsLine(models.Model):
     name = fields.Many2one("hr.employee")
     date = fields.Date()
     contract_id = fields.Many2one("hr.contract")
-    ssnid = fields.Char(string="NSS")
-    amount = fields.Float()
-    timeoff_id = fields.Many2one("hr.leave")
-    state = fields.Selection(
-        [
-            ("draft", "Draft"),
-            ("paid", "Paid"),
-            ("cancel", "Cancel"),
-        ],
-        default="draft",
+    ssnid = fields.Char(
+        string="NSS",
+        related="name.ssnid",
+        store=True
     )
-    company_id = fields.Many2one("res.company")
