@@ -34,8 +34,8 @@
                         type='object'
                     />
                     <button
-                        string="Afiliación (txt)"
-                        name="afilacion_txt"
+                        string="Affiliation TXT"
+                        name="affiliation_txt"
                         class="oe_highlight"
                         states="done,calculated"
                         type='object'

@@ -36,8 +36,8 @@ class HrPayrollSUAReports(models.Model):
     )
     notes = fields.Html()
     movs_count = fields.Integer(compute="_compute_movs_count")
-    txt_file = fields.Binary("txt file")
-    afilacion_file = fields.Binary("Afiliación txt file")
+    txt_file = fields.Binary(string="txt file")
+    affiliation_file = fields.Binary(string="Affiliation txt file")
     company_id = fields.Many2one(
         "res.company", string="Company", default=lambda self: self.env.company
     )
@@ -281,14 +281,18 @@ class HrPayrollSUAReports(models.Model):
                 file_name = "baja.txt"
             else:
                 file_name = "movimiento.txt"
-            
+
             for line in self.line_ids:
                 contract = line.contract_id
                 employee = line.name
 
                 # Get employer register (11 chars)
-                employer_register = str(employee.employer_register.name if employee.employer_register else "")
-                registro_patronal = employer_register[:11].ljust(11)
+                employer_register = str(
+                    employee.employer_register.name
+                    if employee.employer_register
+                    else ""
+                )
+                employer_register_padded = employer_register[:11].ljust(11)
 
                 # NSS (11 chars)
                 ssnid = str(employee.ssnid or "")
@@ -302,44 +306,46 @@ class HrPayrollSUAReports(models.Model):
 
                 # Check if this is a Baja (deregistration) process
                 if sua.report_type == "movt" and sua.movt_type == "02":
-                    # Baja format (49 characters total)
-                    # 1-11: Registro Patronal (11 chars)
+                    # Baja (deregistration) format (49 characters total)
+                    # 1-11: Employer Register (11 chars)
                     # 12-22: NSS (11 chars)
-                    # 23-24: Causa de baja (2 chars) - hardcoded as "20"
-                    # 25-26: Día baja (2 chars)
-                    # 27-28: Mes baja (2 chars)
-                    # 29-32: Año baja (4 chars)
-                    # 33-40: Espacios vacíos (8 chars)
-                    # 41-49: Ceros fijos (9 chars)
-                    
-                    # Causa de baja - hardcoded as "20"
-                    causa_baja = "02"
+                    # 23-24: Deregistration cause (2 chars) - hardcoded as "02"
+                    # 25-26: Deregistration day (2 chars)
+                    # 27-28: Deregistration month (2 chars)
+                    # 29-32: Deregistration year (4 chars)
+                    # 33-40: Empty spaces (8 chars)
+                    # 41-49: Fixed zeros (9 chars)
+
+                    # Deregistration cause - hardcoded as "02"
+                    deregistration_cause = "02"
 
                     # Get date components from line.date
                     if line.date:
-                        baja_date = line.date
+                        deregistration_date = line.date
                     else:
-                        baja_date = fields.Date.context_today(self)
-                    
-                    day = str(baja_date.day).zfill(2)
-                    month = str(baja_date.month).zfill(2)
-                    year = str(baja_date.year)[-4:]  # Get last 4 digits of year
+                        deregistration_date = fields.Date.context_today(self)
 
-                    # Espacios vacíos (8 chars)
-                    espacios_vacios = " " * 8
+                    day = str(deregistration_date.day).zfill(2)
+                    month = str(deregistration_date.month).zfill(2)
+                    year = str(deregistration_date.year)[
+                        -4:
+                    ]  # Get last 4 digits of year
 
-                    # Ceros fijos (9 chars)
-                    ceros_fijos = "000000000"
+                    # Empty spaces (8 chars)
+                    empty_spaces = " " * 8
+
+                    # Fixed zeros (9 chars)
+                    fixed_zeros = "000000000"
 
                     record = (
-                        registro_patronal +        # 1-11: Registro Patronal
-                        nss_padded +               # 12-22: NSS
-                        causa_baja +               # 23-24: Causa de baja
-                        day +                      # 25-26: Día baja
-                        month +                    # 27-28: Mes baja
-                        year +                     # 29-32: Año baja
-                        espacios_vacios +          # 33-40: Espacios vacíos
-                        ceros_fijos                # 41-49: Ceros fijos
+                        employer_register_padded
+                        + nss_padded  # 1-11: Employer Register
+                        + deregistration_cause  # 12-22: NSS
+                        + day  # 23-24: Deregistration cause
+                        + month  # 25-26: Deregistration day
+                        + year  # 27-28: Deregistration month
+                        + empty_spaces  # 29-32: Deregistration year
+                        + fixed_zeros  # 33-40: Empty spaces  # 41-49: Fixed zeros
                     )
                 else:
                     # Alta format (164 characters total)
@@ -348,93 +354,99 @@ class HrPayrollSUAReports(models.Model):
                     day = str(reg_date.day).zfill(2)
                     month = str(reg_date.month).zfill(2)
                     year = str(reg_date.year)
-                    
+
                     # Get employee name components
                     lastname = str(employee.lastname or "").upper()
                     second_lastname = str(employee.second_lastname or "").upper()
                     firstname = str(employee.firstname or "").upper()
-                    
+
                     # Get RFC (13 chars) from employee's VAT
                     rfc = str(employee.address_home_id.vat or "").upper()
                     rfc_padded = (rfc + " " * 13)[:13]
-                    
+
                     # Get CURP (18 chars) from employee
                     curp = str(employee.address_home_id.curp or "").upper()
                     curp_padded = (curp + " " * 18)[:18]
-                    
-                    # Nombre completo con $ separador, pad a 50 caracteres
-                    # Formato: Apellido P. $ Apellido M. $ Nombres
-                    nombre_completo = f"{lastname}${second_lastname}${firstname}"
-                    nombre_completo_padded = (nombre_completo + " " * 50)[:50]
-                    
-                    # Tipo trabajador: from contract_type
+
+                    # Full name with $ separator, padded to 50 characters
+                    # Format: Lastname P. $ Second Lastname M. $ Firstname
+                    full_name = f"{lastname}${second_lastname}${firstname}"
+                    full_name_padded = (full_name + " " * 50)[:50]
+
+                    # Worker type: from contract_type
                     # Mapping contract_type to worker type (1=Perm, 2=Eventual, 3=Ev.Constr.)
                     contract_type = contract.contract_type or "01"
                     if contract_type in ["01", "03"]:  # Indefinite, Specific period
-                        tipo_trabajador = "1"
+                        worker_type = "1"
                     elif contract_type in ["02", "04", "05", "06", "07", "08"]:
-                        tipo_trabajador = "2"
+                        worker_type = "2"
                     else:
-                        tipo_trabajador = "1"  # Default to permanente
-                    
-                    # Tipo jornada: from journal_type
-                    # 0=Completa, 1-5=días trabajados, 6=menos de 1 día
+                        worker_type = "1"  # Default to permanent
+
+                    # Work shift type: from journal_type
+                    # 0=Full, 1-5=days worked, 6=less than 1 day
                     journal_type = contract.journal_type or "00"
                     if journal_type == "00":
-                        tipo_jornada = "0"
+                        work_shift_type = "0"
                     elif journal_type in ["01", "02", "03", "04", "05"]:
-                        tipo_jornada = journal_type[-1]  # Get last digit: 1, 2, 3, 4, 5
+                        work_shift_type = journal_type[
+                            -1
+                        ]  # Get last digit: 1, 2, 3, 4, 5
                     elif journal_type == "06":
-                        tipo_jornada = "6"
+                        work_shift_type = "6"
                     else:
-                        tipo_jornada = "0"
-                    
-                    # Tipo salario: from salary_type
-                    # New mapping: 0=Fijo, 1=Variable, 2=Mixto
+                        work_shift_type = "0"
+
+                    # Salary type: from salary_type
+                    # New mapping: 0=Fixed, 1=Variable, 2=Mixed
                     salary_type = contract.salary_type or "01"
                     if salary_type == "01":
-                        tipo_salario = "0"  # Fixed -> 0 (Fijo)
+                        salary_type_code = "0"  # Fixed -> 0 (Fixed)
                     elif salary_type == "03":
-                        tipo_salario = "1"  # Variable -> 1 (Variable)
+                        salary_type_code = "1"  # Variable -> 1 (Variable)
                     else:
-                        tipo_salario = "2"  # Mixte -> 2 (Mixto)
-                    
-                    # Salario diario integrado (SDI)
+                        salary_type_code = "2"  # Mixed -> 2 (Mixed)
+
+                    # Integrated daily salary (SDI)
                     sdi = contract.sdi or 0.0
-                    sdi_entero = int(sdi)
-                    sdi_decimal = int(round((sdi - sdi_entero) * 100))
-                    
-                    # Format salary: entero (5 digits) + decimales (2 digits)
-                    salario_entero = str(sdi_entero).zfill(5)[-5:]  # RIGHT("00000"& INT(sal), 5)
-                    salario_decimales = str(sdi_decimal).zfill(2)[-2:]  # RIGHT(FIXED(sal,2), 2)
-                    
-                    # Clave/Ocupación: employee_number (17 chars)
+                    sdi_integer = int(sdi)
+                    sdi_decimal = int(round((sdi - sdi_integer) * 100))
+
+                    # Format salary: integer (5 digits) + decimals (2 digits)
+                    salary_integer = str(sdi_integer).zfill(5)[
+                        -5:
+                    ]  # RIGHT("00000"& INT(sal), 5)
+                    salary_decimals = str(sdi_decimal).zfill(2)[
+                        -2:
+                    ]  # RIGHT(FIXED(sal,2), 2)
+
+                    # Occupation code: employee_number (17 chars)
                     employee_number = str(employee.employee_number or "")
-                    clave_ocupacion = (employee_number + " " * 17)[:17]
-                    
-                    # Tipo salario code (8 chars)
-                    tipo_salario_code = tipo_salario * 7
-                    
+                    occupation_code = (employee_number + " " * 17)[:17]
+
+                    # Salary type code (8 chars)
+                    salary_type_code_padded = salary_type_code * 7
+
                     record = (
-                        employer_register[:11].ljust(11) +           # 1-11: Registro Patronal
-                        nss +                                        # 12-22: NSS
-                        rfc_padded +                                 # 23-35: RFCC
-                        curp_padded +                                # 36-53: CURP
-                        nombre_completo_padded +                     # 54-103: Nombre completo
-                        tipo_trabajador +                            # 104: Tipo trabajador
-                        tipo_jornada +                               # 105: Tipo jornada
-                        day +                                        # 106-107: Día
-                        month +                                      # 108-109: Mes
-                        year +                                       # 110-113: Año
-                        salario_entero +                             # 114-118: Salario entero
-                        salario_decimales +                          # 119-120: Salario decimales
-                        clave_ocupacion +                            # 121-137: Clave/Ocupación
-                        " " * 10 +                                   # 138-147: Espacios vacíos
-                        day +                                        # 148-149: Día repetido
-                        month +                                      # 150-151: Mes repetido
-                        year +                                       # 152-155: Año repetido
-                        " " +                                        # 156: Espacio separador
-                        tipo_salario_code                            # 157-164: Tipo salario
+                        employer_register[:11].ljust(11)
+                        + nss  # 1-11: Employer Register
+                        + rfc_padded  # 12-22: NSS
+                        + curp_padded  # 23-35: RFCC
+                        + full_name_padded  # 36-53: CURP
+                        + worker_type  # 54-103: Full name
+                        + work_shift_type  # 104: Worker type
+                        + day  # 105: Work shift type
+                        + month  # 106-107: Day
+                        + year  # 108-109: Month
+                        + salary_integer  # 110-113: Year
+                        + salary_decimals  # 114-118: Salary integer
+                        + occupation_code  # 119-120: Salary decimals
+                        + " " * 10  # 121-137: Occupation code
+                        + day  # 138-147: Empty spaces
+                        + month  # 148-149: Day repeated
+                        + year  # 150-151: Month repeated
+                        + " "  # 152-155: Year repeated
+                        + salary_type_code_padded  # 156: Space separator  # 157-164: Salary type code
                     )
 
                 data += record + "\n"
@@ -447,8 +459,8 @@ class HrPayrollSUAReports(models.Model):
             "target": "self",
         }
 
-    def afilacion_txt(self):
-        """Generate Afiliación TXT file for IMSS registration"""
+    def affiliation_txt(self):
+        """Generate Affiliation TXT file for IMSS registration"""
         lines = ""
         for sua in self:
             for line in self.line_ids:
@@ -456,8 +468,12 @@ class HrPayrollSUAReports(models.Model):
                 employee = line.name
 
                 # Get employer register (11 chars)
-                employer_register = str(employee.employer_register.name if employee.employer_register else "")
-                registro_patronal = employer_register[:11].ljust(11)
+                employer_register = str(
+                    employee.employer_register.name
+                    if employee.employer_register
+                    else ""
+                )
+                employer_register_padded = employer_register[:11].ljust(11)
 
                 # NSS (11 chars)
                 ssnid = str(employee.ssnid or "")
@@ -469,38 +485,38 @@ class HrPayrollSUAReports(models.Model):
                     nss = ssnid.zfill(11)
                 nss_padded = nss[:11].ljust(11)
 
-                # CP - Código Postal from employee address (5 chars)
+                # Postal code from employee address (5 chars)
                 zip_code = str(employee.address_home_id.zip or "")
-                cp = zip_code[:5].zfill(5)
+                postal_code = zip_code[:5].zfill(5)
 
                 # Birth date components from CURP (positions 0-5: YYMMDD)
                 curp = str(employee.address_home_id.curp or "").upper()
                 if curp and len(curp) >= 6:
                     # Extract YYMMDD from CURP
-                    ano_nacimiento = curp[4:6]  # Last 2 digits of year
-                    mes_nacimiento = curp[6:8]  # Month
-                    dia_nacimiento = curp[8:10]  # Day
+                    birth_year = curp[4:6]  # Last 2 digits of year
+                    birth_month = curp[6:8]  # Month
+                    birth_day = curp[8:10]  # Day
                 else:
                     # Default values if CURP is not available
-                    dia_nacimiento = "01"
-                    mes_nacimiento = "01"
-                    ano_nacimiento = "00"
+                    birth_day = "01"
+                    birth_month = "01"
+                    birth_year = "00"
 
                 # State code from CURP (positions 10-11, characters 11-12 in 1-based)
                 # Mapping CURP state codes to numeric keys (1-33)
                 curp_state_code = curp[11:13] if curp and len(curp) >= 13 else ""
-                
+
                 # State code mapping table (CURP code -> numeric key)
                 state_code_mapping = {
-                    "AS": 1,   # Aguascalientes
-                    "BC": 2,   # Baja California
-                    "BS": 3,   # Baja California Sur
-                    "CC": 4,   # Campeche
-                    "CS": 5,   # Chiapas
-                    "CH": 6,   # Chihuahua
-                    "DF": 7,   # Ciudad de México
-                    "CL": 8,   # Coahuila
-                    "CM": 9,   # Colima
+                    "AS": 1,  # Aguascalientes
+                    "BC": 2,  # Baja California
+                    "BS": 3,  # Baja California Sur
+                    "CC": 4,  # Campeche
+                    "CS": 5,  # Chiapas
+                    "CH": 6,  # Chihuahua
+                    "DF": 7,  # Ciudad de México
+                    "CL": 8,  # Coahuila
+                    "CM": 9,  # Colima
                     "DG": 10,  # Durango
                     "GT": 11,  # Guanajuato
                     "GR": 12,  # Guerrero
@@ -526,10 +542,10 @@ class HrPayrollSUAReports(models.Model):
                     "ZS": 32,  # Zacatecas
                     "NE": 33,  # Nacido en el Extranjero
                 }
-                
+
                 # Get numeric state key from CURP code
                 state_key = state_code_mapping.get(curp_state_code, 0)
-                
+
                 # State code (2 chars) - use the numeric key padded to 2 digits
                 state_code_padded = str(state_key).zfill(2) if state_key > 0 else "00"
 
@@ -570,76 +586,76 @@ class HrPayrollSUAReports(models.Model):
                     32: "ZACATECAS",
                     33: "NACIDO EN EL EXTRANJERO",
                 }
-                
+
                 state_name = state_name_mapping.get(state_key, "")
                 state_name_padded = state_name[-25:].rjust(25)
 
-                # UMF - Unidad Médica Familiar (3 chars)
+                # UMF - Family Medical Unit (3 chars)
                 umf = str(employee.umf or "001")
                 umf_padded = umf[:3].zfill(3)
 
-                # Clave/Ocupación - employee_number (12 chars)
+                # Occupation code - employee_number (12 chars)
                 employee_number = str(employee.employee_number or "")
-                clave_ocupacion = employee_number[:12].ljust(12)
+                occupation_code = employee_number[:12].ljust(12)
 
-                # Sexo (1 char) from CURP position 11 (index 10)
-                # CURP position 11: H = hombre, M = mujer
-                # Mapping: H -> M, M -> F
+                # Gender (1 char) from CURP position 11 (index 10)
+                # CURP position 11: H = hombre (man), M = mujer (woman)
+                # Mapping: H -> M (Male), M -> F (Female)
                 if curp and len(curp) >= 11:
                     curp_gender = curp[10]  # Position 11 in 1-based indexing
                     if curp_gender == "H":
-                        sexo = "M"  # Hombre -> M
+                        gender = "M"  # Man -> M
                     elif curp_gender == "M":
-                        sexo = "F"  # Mujer -> F
+                        gender = "F"  # Woman -> F
                     else:
-                        sexo = " "
+                        gender = " "
                 else:
-                    sexo = " "
+                    gender = " "
 
-                # Tipo jornada (1 char) - from contract.journal_type
+                # Work shift type (1 char) - from contract.journal_type
                 journal_type = contract.journal_type or "00"
                 if journal_type == "00":
-                    tipo_jornada = "0"
+                    work_shift_type = "0"
                 elif journal_type in ["01", "02", "03", "04", "05"]:
-                    tipo_jornada = journal_type[-1]
+                    work_shift_type = journal_type[-1]
                 elif journal_type == "06":
-                    tipo_jornada = "6"
+                    work_shift_type = "6"
                 else:
-                    tipo_jornada = "0"
+                    work_shift_type = "0"
 
-                # Espacio (1 char)
-                espacio = " "
+                # Space (1 char)
+                space = " "
 
                 # Build the record (80 characters total)
                 # Position mapping:
-                # 1-11: Registro Patronal (11 chars)
+                # 1-11: Employer Register (11 chars)
                 # 12-22: NSS (11 chars)
-                # 23-27: CP (5 chars)
-                # 28-29: Día nacimiento (2 chars)
-                # 30-31: Mes nacimiento (2 chars)
-                # 32-35: Año nacimiento (4 chars)
-                # 36-60: Nombre estado (25 chars, right aligned)
-                # 61-62: Clave estado (2 chars)
+                # 23-27: Postal code (5 chars)
+                # 28-29: Birth day (2 chars)
+                # 30-31: Birth month (2 chars)
+                # 32-35: Birth year (4 chars)
+                # 36-60: State name (25 chars, right aligned)
+                # 61-62: State code (2 chars)
                 # 63-65: UMF (3 chars)
-                # 66-77: Clave/Ocupación (12 chars)
-                # 78: Sexo (1 char)
-                # 79: Tipo jornada (1 char)
-                # 80: Espacio (1 char)
+                # 66-77: Occupation code (12 chars)
+                # 78: Gender (1 char)
+                # 79: Work shift type (1 char)
+                # 80: Space (1 char)
 
                 record = (
-                    registro_patronal +                    # 1-11: Registro Patronal
-                    nss_padded +                           # 12-22: NSS
-                    cp +                                   # 23-27: CP
-                    dia_nacimiento +                       # 28-29: Día nacimiento
-                    mes_nacimiento +                       # 30-31: Mes nacimiento
-                    ano_nacimiento +                       # 32-35: Año nacimiento
-                    state_name_padded +                    # 36-60: Nombre estado
-                    state_code_padded +                    # 61-62: Clave estado
-                    umf_padded +                           # 63-65: UMF
-                    clave_ocupacion +                      # 66-77: Clave/Ocupación
-                    sexo +                                 # 78: Sexo
-                    tipo_jornada +                         # 79: Tipo jornada
-                    espacio                                # 80: Espacio
+                    employer_register_padded
+                    + nss_padded  # 1-11: Employer Register
+                    + postal_code  # 12-22: NSS
+                    + birth_day  # 23-27: Postal code
+                    + birth_month  # 28-29: Birth day
+                    + birth_year  # 30-31: Birth month
+                    + state_name_padded  # 32-35: Birth year
+                    + state_code_padded  # 36-60: State name
+                    + umf_padded  # 61-62: State code
+                    + occupation_code  # 63-65: UMF
+                    + gender  # 66-77: Occupation code
+                    + work_shift_type  # 78: Gender
+                    + space  # 79: Work shift type  # 80: Space
                 )
 
                 lines += record + "\n"
@@ -647,12 +663,13 @@ class HrPayrollSUAReports(models.Model):
             # Encode to CP1252 and then Base64
             encoded_bytes = lines.encode("cp1252")
             base64_encoded = base64.b64encode(encoded_bytes)
-            
-            self.afilacion_file = base64_encoded
-            
+
+            self.affiliation_file = base64_encoded
+
             return {
                 "type": "ir.actions.act_url",
-                "url": "/web/content/hr.payroll.sua.reports/%s/afilacion_file?download=true&filename=afiliacion.txt" % (self.id),
+                "url": "/web/content/hr.payroll.sua.reports/%s/affiliation_file?download=true&filename=affiliation.txt"
+                % (self.id),
                 "target": "self",
             }
 
