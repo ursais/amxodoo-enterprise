@@ -733,8 +733,4 @@ class HrPayrollSUAReportsLine(models.Model):
     name = fields.Many2one("hr.employee")
     date = fields.Date()
     contract_id = fields.Many2one("hr.contract")
-    ssnid = fields.Char(
-        string="NSS",
-        related="name.ssnid",
-        store=True
-    )
+    ssnid = fields.Char(string="NSS", related="name.ssnid", store=True)

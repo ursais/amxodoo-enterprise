@@ -52,10 +52,7 @@
                         <group>
                             <label for="date_start" string="Period" />
                             <span>
-                                <field
-                                    name="date_start"
-                                    class="oe_inline"
-                                /> - <field
+                                <field name="date_start" class="oe_inline" /> - <field
                                     name="date_end"
                                     class="oe_inline"
                                 />
