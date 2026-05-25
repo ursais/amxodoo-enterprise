@@ -472,8 +472,8 @@ class HrPayrollSUAReports(models.Model):
                     ]  # RIGHT(FIXED(sal,2), 2)
 
                     # Occupation code: employee_number (17 chars)
-                    employee_number = str(employee.employee_number or "")
-                    occupation_code = (employee_number + " " * 17)[:17]
+                    #employee_number = str(employee.employee_number or "") seems it is not requiere 
+                    occupation_code = ( " " * 17)[:17]
 
                     # Salary type code (8 chars)
                     salary_type_code_padded = salary_type_code * 7
