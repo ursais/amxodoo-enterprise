@@ -1,5 +1,6 @@
 import base64
 import logging
+from datetime import date
 
 from odoo import _, api, fields, models
 
@@ -475,7 +476,7 @@ class HrPayrollSUAReports(models.Model):
                     occupation_code = ( " " * 17)[:17]
 
                     # Salary type code (8 chars)
-                    salary_type_code_padded = salary_type_code * 7
+                    salary_type_code_padded = salary_type_code * 8
 
                     record = (
                         employer_register[:11].ljust(11)
@@ -496,10 +497,10 @@ class HrPayrollSUAReports(models.Model):
                         + month  # 148-149: Day repeated
                         + year  # 150-151: Month repeated
                         + " "  # 152-155: Year repeated
-                        + salary_type_code_padded  # 156: Space separator  # 157-164: Salary type code
+                        + salary_type_code_padded  # 157-164: Salary type code
                     )
 
-                data += record + "\n"
+                data += record + "\r\n"
 
         self.txt_file = base64.b64encode(data.encode("cp1252"))
         return {
@@ -539,18 +540,20 @@ class HrPayrollSUAReports(models.Model):
                 zip_code = str(employee.address_home_id.zip or "")
                 postal_code = zip_code[:5].zfill(5)
 
-                # Birth date components from CURP (positions 0-5: YYMMDD)
+                # Birth date components from CURP (positions 5-10 = YYMMDD)
                 curp = str(employee.address_home_id.curp or "").upper()
-                if curp and len(curp) >= 6:
-                    # Extract YYMMDD from CURP
-                    birth_year = curp[4:6]  # Last 2 digits of year
-                    birth_month = curp[6:8]  # Month
-                    birth_day = curp[8:10]  # Day
+                if curp and len(curp) >= 10:
+                    birth_day = curp[8:10]
+                    birth_month = curp[6:8]
+                    birth_yy = int(curp[4:6])
+                    current_yy = date.today().year % 100
+                    birth_year = str(
+                        1900 + birth_yy if birth_yy > current_yy else 2000 + birth_yy
+                    )
                 else:
-                    # Default values if CURP is not available
                     birth_day = "01"
                     birth_month = "01"
-                    birth_year = "00"
+                    birth_year = "0000"
 
                 # State code from CURP (positions 10-11, characters 11-12 in 1-based)
                 # Mapping CURP state codes to numeric keys (1-33)
@@ -708,7 +711,7 @@ class HrPayrollSUAReports(models.Model):
                     + space  # 79: Work shift type  # 80: Space
                 )
 
-                lines += record + "\n"
+                lines += record + "\r\n"
 
             # Encode to CP1252 and then Base64
             encoded_bytes = lines.encode("cp1252")
