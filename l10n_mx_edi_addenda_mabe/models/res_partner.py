@@ -1,9 +1,15 @@
-from odoo import fields, models
+# Copyright (C) 2023 Open Source Integrators
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    mabe_addenda_selected = fields.Boolean(
+        compute="_compute_mabe_addenda_selected",
+    )
     mabe_plant_code = fields.Selection(
         selection=[
             ("S001", '[S001] - ESTUFAS 30"'),
@@ -164,3 +170,14 @@ class ResPartner(models.Model):
             ("T136", "[T136] - ADR SAN LUIS POTOSI"),
         ]
     )
+
+    @api.depends("l10n_mx_edi_addenda_ids")
+    def _compute_mabe_addenda_selected(self):
+        addenda = self.env.ref(
+            "l10n_mx_edi_addenda_mabe.l10n_mx_edi_addenda_mabe",
+            raise_if_not_found=False,
+        )
+        for partner in self:
+            partner.mabe_addenda_selected = bool(
+                addenda and addenda in partner.l10n_mx_edi_addenda_ids
+            )
