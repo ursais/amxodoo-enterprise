@@ -40,7 +40,7 @@ jobs:
           fi
       - name: Commit and push updated README.md
         if: github.event_name != 'pull_request'
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "[BOT] Update addons table in README.md"
           file_pattern: README.md

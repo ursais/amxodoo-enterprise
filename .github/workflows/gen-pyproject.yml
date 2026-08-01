@@ -42,7 +42,7 @@ jobs:
           fi
       - name: Commit and push generated pyproject.toml
         if: github.event_name != 'pull_request'
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "[BOT] Generate addon pyproject.toml with whool"
           file_pattern: "*/pyproject.toml"
