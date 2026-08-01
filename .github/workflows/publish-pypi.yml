@@ -1,0 +1,45 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - "17.0.*"
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install build tools
+        run: pip install build twine whool
+      - name: Build wheels for each addon
+        run: |
+          set -euo pipefail
+          for addon in */; do
+            if [ -f "${addon}pyproject.toml" ] && [ -f "${addon}__manifest__.py" ]; then
+              echo "Building ${addon%/}"
+              (cd "${addon}" && python -m build --outdir dist)
+            fi
+          done
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${TWINE_PASSWORD:-}" ]; then
+            echo "Missing repository secret PYPI_API_TOKEN"
+            exit 1
+          fi
+          wheels=( */dist/*.whl )
+          if [ ! -e "${wheels[0]}" ]; then
+            echo "No wheels were built"
+            exit 1
+          fi
+          python -m twine upload --skip-existing "${wheels[@]}"
