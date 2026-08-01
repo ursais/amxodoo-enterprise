@@ -1,0 +1,4 @@
+- Santiago Rodriguez \<<srodriguez@opensourceintegrators.com>\>
+- Edgar Martinez \<<emartinez@opensourceintegrators.com>\>
+- Samuel Macias \<<smacias@opensourceintegrators.com>\>
+- Maxime Chambreuil \<<maxime.chambreuil@graymatterlogic.com>\>
