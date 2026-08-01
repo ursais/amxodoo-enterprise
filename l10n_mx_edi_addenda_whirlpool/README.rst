@@ -70,20 +70,20 @@ Credits
 Authors
 -------
 
-* Open Source Integrators
+* Gray Matter Logic
 * Odoo Mexican Association (AMOdoo)
 
 Contributors
 ------------
 
-- Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
+- Maxime Chambreuil <maxime.chambreuil@graymatterlogic.com>
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
-- Open Source Integrators <https://www.opensourceintegrators.com>
+- Gray Matter Logic <https://www.graymatterlogic.com>
 
 Maintainers
 -----------

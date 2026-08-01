@@ -1,1 +1,1 @@
-- Maxime Chambreuil \<<mchambreuil@opensourceintegrators.com>\>
+- Maxime Chambreuil \<<maxime.chambreuil@graymatterlogic.com>\>

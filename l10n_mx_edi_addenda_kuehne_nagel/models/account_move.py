@@ -1,4 +1,4 @@
-# Copyright (C) 2026 Open Source Integrators (https://www.opensourceintegrators.com)
+# Copyright (C) 2026 Gray Matter Logic (https://www.graymatterlogic.com)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import re
