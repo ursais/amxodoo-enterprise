@@ -19,12 +19,12 @@ jobs:
   gen-addon-readme:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           # Needed so the auto-commit step can push to PR branches from forks
           # only when running with sufficient permissions on the same repo.
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
       - name: Install maintainer tools
