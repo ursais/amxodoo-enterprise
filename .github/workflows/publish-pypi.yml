@@ -39,15 +39,46 @@ jobs:
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+          # PyPI rate-limits burst uploads; space requests and retry 429s.
+          UPLOAD_DELAY_SECONDS: "15"
+          UPLOAD_MAX_ATTEMPTS: "5"
         run: |
           set -euo pipefail
           if [ -z "${TWINE_PASSWORD:-}" ]; then
             echo "Missing repository secret PYPI_API_TOKEN"
             exit 1
           fi
+          shopt -s nullglob
           wheels=( */dist/*.whl )
-          if [ ! -e "${wheels[0]}" ]; then
+          if [ "${#wheels[@]}" -eq 0 ]; then
             echo "No wheels were built"
             exit 1
           fi
-          python -m twine upload --skip-existing "${wheels[@]}"
+          for wheel in "${wheels[@]}"; do
+            echo "Uploading ${wheel}"
+            attempt=1
+            while true; do
+              set +e
+              output="$(python -m twine upload --skip-existing "${wheel}" 2>&1)"
+              status=$?
+              set -e
+              printf '%s\n' "${output}"
+              if [ "${status}" -eq 0 ]; then
+                break
+              fi
+              if printf '%s\n' "${output}" | grep -Eqi '429|Too Many Requests'; then
+                if [ "${attempt}" -ge "${UPLOAD_MAX_ATTEMPTS}" ]; then
+                  echo "Gave up uploading ${wheel} after ${attempt} attempts"
+                  exit 1
+                fi
+                sleep_for=$((UPLOAD_DELAY_SECONDS * attempt))
+                echo "Rate limited; sleeping ${sleep_for}s before retry ${attempt}/${UPLOAD_MAX_ATTEMPTS}"
+                sleep "${sleep_for}"
+                attempt=$((attempt + 1))
+                continue
+              fi
+              echo "Upload failed for ${wheel}"
+              exit "${status}"
+            done
+            sleep "${UPLOAD_DELAY_SECONDS}"
+          done
