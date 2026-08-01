@@ -141,8 +141,10 @@ class AccountMove(models.Model):
                     )
                 )
             file_val = (record.kn_file_number_gl or "").strip()
-            if file_val and record.kn_file_type == "file" and not KN_FILE_RE.match(
+            if (
                 file_val
+                and record.kn_file_type == "file"
+                and not KN_FILE_RE.match(file_val)
             ):
                 raise ValidationError(
                     _(
@@ -150,8 +152,10 @@ class AccountMove(models.Model):
                         "(16 characters, no separators)."
                     )
                 )
-            if file_val and record.kn_file_type == "tracking" and not KN_TRACKING_RE.match(
+            if (
                 file_val
+                and record.kn_file_type == "tracking"
+                and not KN_TRACKING_RE.match(file_val)
             ):
                 raise ValidationError(
                     _(
