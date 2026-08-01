@@ -1,0 +1,3 @@
+- Edgar Martinez \<<emartinez@opensourceintegrators.com>\>
+- Samuel Macias \<<smacias@opensourceintegrators.com>\>
+- Maxime Chambreuil \<<mchambreuil@opensourceintegrators.com>\>
