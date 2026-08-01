@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_move_form_inherit_addenda_kuehne_nagel" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.addenda.kuehne.nagel</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <field invisible="1" name="kn_flag" />
+                <page
+                    string="Kuehne+Nagel Addenda"
+                    name="addenda_kuehne_nagel"
+                    invisible="not kn_flag"
+                >
+                    <group>
+                        <field
+                            name="kn_file_type"
+                            string="File / Tracking Type"
+                            required="kn_flag"
+                        />
+                        <field
+                            name="kn_file_number_gl"
+                            string="File / Tracking Number"
+                            required="kn_flag"
+                        />
+                        <field
+                            name="kn_branch_centre"
+                            string="Branch Centre"
+                            required="kn_flag"
+                        />
+                        <field
+                            name="kn_transport_ref"
+                            string="Transport Ref"
+                            required="kn_flag"
+                        />
+                    </group>
+                    <group string="Hints">
+                        <div colspan="2">
+                            <p>
+                                Purchase Order uses the Customer Reference field
+                                (empty when not applicable, or PO + 4 letters + 9 digits).
+                            </p>
+                            <p>
+                                File Number: 73 + 14 digits. Tracking Number: ##########-####.
+                            </p>
+                        </div>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
