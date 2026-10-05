@@ -14,13 +14,29 @@ class AccountMove(models.Model):
     audi_fiscal_document_type = fields.Char(string="Fiscal Document Type")
     audi_document_type = fields.Char(string="Document Type")
 
-    @api.depends("partner_id.l10n_mx_edi_addenda_ids")
+    @api.depends(
+        "commercial_partner_id.l10n_mx_edi_addenda_ids",
+        "l10n_mx_edi_addenda_ids",
+    )
     def _compute_audi_flag(self):
+        """Show the Audi tab from the parent company addenda.
+
+        Invoicing settings, including addendas, are stored on the commercial
+        partner. An invoice for a contact must still open the tab. A leftover
+        record with the same name as the module addenda counts too.
+        """
         addenda = self.env.ref(
             "l10n_mx_edi_addenda_audi.l10n_mx_edi_addenda_audi",
             raise_if_not_found=False,
         )
-        for record in self:
-            record.audi_flag = bool(
-                addenda and addenda in record.partner_id.l10n_mx_edi_addenda_ids
+        official = addenda
+        if addenda:
+            official |= self.env["l10n_mx_edi.addenda"].search(
+                [("name", "=", addenda.name)]
             )
+        for record in self:
+            selected = (
+                record.l10n_mx_edi_addenda_ids
+                | record.commercial_partner_id.l10n_mx_edi_addenda_ids
+            )
+            record.audi_flag = bool(official & selected)

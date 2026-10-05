@@ -13,13 +13,20 @@ class ResPartner(models.Model):
         compute="_compute_audi_addenda_selected",
     )
 
-    @api.depends("l10n_mx_edi_addenda_ids")
+    @api.depends(
+        "l10n_mx_edi_addenda_ids",
+        "commercial_partner_id.l10n_mx_edi_addenda_ids",
+    )
     def _compute_audi_addenda_selected(self):
         addenda = self.env.ref(
             "l10n_mx_edi_addenda_audi.l10n_mx_edi_addenda_audi",
             raise_if_not_found=False,
         )
-        for partner in self:
-            partner.audi_addenda_selected = bool(
-                addenda and addenda in partner.l10n_mx_edi_addenda_ids
+        official = addenda
+        if addenda:
+            official |= self.env["l10n_mx_edi.addenda"].search(
+                [("name", "=", addenda.name)]
             )
+        for partner in self:
+            selected = partner.commercial_partner_id.l10n_mx_edi_addenda_ids
+            partner.audi_addenda_selected = bool(official & selected)

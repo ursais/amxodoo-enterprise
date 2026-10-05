@@ -38,6 +38,31 @@ class TestAddendaAudi(AccountTestInvoicingCommon):
         )
         self.assertTrue(move.audi_flag)
 
+    def test_audi_flag_from_parent_company(self):
+        company = self.env["res.partner"].create(
+            {
+                "name": "Audi Company",
+                "is_company": True,
+                "l10n_mx_edi_addenda_ids": [(6, 0, self.addenda.ids)],
+            }
+        )
+        contact = self.env["res.partner"].create(
+            {
+                "name": "Audi Contact",
+                "parent_id": company.id,
+                "type": "invoice",
+            }
+        )
+        self.assertTrue(contact.audi_addenda_selected)
+        move = self.env["account.move"].create(
+            {
+                "move_type": "out_invoice",
+                "partner_id": contact.id,
+                "journal_id": self.sale_journal.id,
+            }
+        )
+        self.assertTrue(move.audi_flag)
+
     def test_audi_flag_false_without_addenda(self):
         partner = self.env["res.partner"].create({"name": "Other"})
         self.assertFalse(partner.audi_addenda_selected)

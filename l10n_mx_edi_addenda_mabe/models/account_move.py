@@ -12,13 +12,23 @@ class AccountMove(models.Model):
     mabe_amount_with_letter = fields.Char(string="Amount with letter")
     mabe_flag = fields.Boolean(compute="_compute_mabe_flag", store=True)
 
-    @api.depends("partner_id.l10n_mx_edi_addenda_ids")
+    @api.depends(
+        "commercial_partner_id.l10n_mx_edi_addenda_ids",
+        "l10n_mx_edi_addenda_ids",
+    )
     def _compute_mabe_flag(self):
         addenda = self.env.ref(
             "l10n_mx_edi_addenda_mabe.l10n_mx_edi_addenda_mabe",
             raise_if_not_found=False,
         )
-        for record in self:
-            record.mabe_flag = bool(
-                addenda and addenda in record.partner_id.l10n_mx_edi_addenda_ids
+        official = addenda
+        if addenda:
+            official |= self.env["l10n_mx_edi.addenda"].search(
+                [("name", "=", addenda.name)]
             )
+        for record in self:
+            selected = (
+                record.l10n_mx_edi_addenda_ids
+                | record.commercial_partner_id.l10n_mx_edi_addenda_ids
+            )
+            record.mabe_flag = bool(official & selected)

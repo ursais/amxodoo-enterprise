@@ -19,16 +19,26 @@ class AccountMove(models.Model):
     kn_transport_ref = fields.Char(string="KN Transport Ref")
     kn_flag = fields.Boolean(compute="_compute_kn_flag", store=True)
 
-    @api.depends("partner_id.l10n_mx_edi_addenda_ids")
+    @api.depends(
+        "commercial_partner_id.l10n_mx_edi_addenda_ids",
+        "l10n_mx_edi_addenda_ids",
+    )
     def _compute_kn_flag(self):
         addenda = self.env.ref(
             "l10n_mx_edi_addenda_kuehne_nagel.l10n_mx_edi_addenda_kuehne_nagel",
             raise_if_not_found=False,
         )
-        for record in self:
-            record.kn_flag = bool(
-                addenda and addenda in record.partner_id.l10n_mx_edi_addenda_ids
+        official = addenda
+        if addenda:
+            official |= self.env["l10n_mx_edi.addenda"].search(
+                [("name", "=", addenda.name)]
             )
+        for record in self:
+            selected = (
+                record.l10n_mx_edi_addenda_ids
+                | record.commercial_partner_id.l10n_mx_edi_addenda_ids
+            )
+            record.kn_flag = bool(official & selected)
 
     def _l10n_mx_edi_kn_normalize_vals(self, vals):
         """Normalize KN-specific values before create/write."""
