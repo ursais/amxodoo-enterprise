@@ -3,16 +3,11 @@
     <record id="l10n_mx_edi_addenda_volkswagen" model="l10n_mx_edi.addenda">
         <field name="name">Addenda Volkswagen</field>
         <field name="arch" type="xml">
-            <t
-                xmlns:PSV="http://www.vwnovedades.com/volkswagen/kanseilab/shcp/2009/Addenda/PSV"
-            >
+            <t>
                 <t t-xml-node="comprobante">
-                    <t
-                        t-namespace-key="PSV"
-                        t-namespace-url="http://www.vwnovedades.com/volkswagen/kanseilab/shcp/2009/Addenda/PSV"
-                    />
+                    <t t-namespace-key="PSV" t-namespace-url="http://www.vwnovedades.com/volkswagen/kanseilab/shcp/2009/Addenda/PSV"/>
                 </t>
-                <t t-xml-node="addenda">
+                <t t-xml-node="addenda" xmlns:PSV="http://www.vwnovedades.com/volkswagen/kanseilab/shcp/2009/Addenda/PSV">
                     <PSV:Factura
                         version="1.0"
                         tipoDocumentoFiscal="FA"

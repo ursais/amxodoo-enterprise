@@ -3,15 +3,12 @@
     <record id="l10n_mx_edi_addenda_audi" model="l10n_mx_edi.addenda">
         <field name="name">Addenda Audi</field>
         <field name="arch" type="xml">
-            <t xmlns:S="http://www.Audi.net.mx/Addenda/S">
+            <t>
                 <t t-xml-node="comprobante">
-                    <t
-                        t-namespace-key="S"
-                        t-namespace-url="http://www.Audi.net.mx/Addenda/S"
-                    />
+                    <t t-namespace-key="S" t-namespace-url="http://www.Audi.net.mx/Addenda/S"/>
                     <t t-schema-locations="http://www.Audi.net.mx/Addenda/S S.xsd" />
                 </t>
-                <t t-xml-node="addenda">
+                <t t-xml-node="addenda" xmlns:S="http://www.Audi.net.mx/Addenda/S">
                     <S:Factura
                         t-att-codigoImpuesto="record.audi_tax_code"
                         t-att-tipoDocumentoFiscal="record.audi_fiscal_document_type"

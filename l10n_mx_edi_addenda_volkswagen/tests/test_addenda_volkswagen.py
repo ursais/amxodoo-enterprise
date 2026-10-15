@@ -21,6 +21,13 @@ class TestAddendaVolkswagen(AccountTestInvoicingCommon):
     def test_addenda_record_loaded(self):
         self.assertEqual(self.addenda.name, "Addenda Volkswagen")
         self.assertIn("PSV", self.addenda.arch)
+        decoded = self.addenda._decode_single_addenda_arch()
+        self.assertNotIn("error", decoded)
+        self.assertIn("addenda", decoded)
+        self.assertEqual(
+            decoded["addenda"]["nsmap"].get("PSV"),
+            "http://www.vwnovedades.com/volkswagen/kanseilab/shcp/2009/Addenda/PSV",
+        )
 
     def test_vw_flag(self):
         partner = self.env["res.partner"].create(

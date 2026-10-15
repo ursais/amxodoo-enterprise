@@ -3,17 +3,12 @@
     <record id="l10n_mx_edi_addenda_ford" model="l10n_mx_edi.addenda">
         <field name="name">Addenda Ford</field>
         <field name="arch" type="xml">
-            <t xmlns:fomadd="http://www.ford.com.mx/cfdi/addenda">
+            <t>
                 <t t-xml-node="comprobante">
-                    <t
-                        t-namespace-key="fomadd"
-                        t-namespace-url="http://www.ford.com.mx/cfdi/addenda"
-                    />
-                    <t
-                        t-schema-locations="http://www.ford.com.mx/cfdi/addenda http://www.ford.com.mx/cfdi/addenda/cfdiAddendaFord_1_0.xsd"
-                    />
+                    <t t-namespace-key="fomadd" t-namespace-url="http://www.ford.com.mx/cfdi/addenda"/>
+                    <t t-schema-locations="http://www.ford.com.mx/cfdi/addenda http://www.ford.com.mx/cfdi/addenda/cfdiAddendaFord_1_0.xsd"/>
                 </t>
-                <t t-xml-node="addenda">
+                <t t-xml-node="addenda" xmlns:fomadd="http://www.ford.com.mx/cfdi/addenda">
                     <fomadd:addenda>
                         <fomadd:FOMASN version="1.0">
                             <fomadd:GSDB t-out="record.ref or ''" />
