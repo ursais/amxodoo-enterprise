@@ -9,6 +9,7 @@
                     <t t-schema-locations="http://www.ford.com.mx/cfdi/addenda http://www.ford.com.mx/cfdi/addenda/cfdiAddendaFord_1_0.xsd"/>
                 </t>
                 <t t-xml-node="addenda" xmlns:fomadd="http://www.ford.com.mx/cfdi/addenda">
+                    <t t-namespace-key="fomadd" t-namespace-url="http://www.ford.com.mx/cfdi/addenda"/>
                     <fomadd:addenda>
                         <fomadd:FOMASN version="1.0">
                             <fomadd:GSDB t-out="record.ref or ''" />

@@ -4,10 +4,8 @@
         <field name="name">Addenda Volkswagen</field>
         <field name="arch" type="xml">
             <t>
-                <t t-xml-node="comprobante">
-                    <t t-namespace-key="PSV" t-namespace-url="http://www.vwnovedades.com/volkswagen/kanseilab/shcp/2009/Addenda/PSV"/>
-                </t>
                 <t t-xml-node="addenda" xmlns:PSV="http://www.vwnovedades.com/volkswagen/kanseilab/shcp/2009/Addenda/PSV">
+                    <t t-namespace-key="PSV" t-namespace-url="http://www.vwnovedades.com/volkswagen/kanseilab/shcp/2009/Addenda/PSV"/>
                     <PSV:Factura
                         version="1.0"
                         tipoDocumentoFiscal="FA"
@@ -16,7 +14,7 @@
                     >
                         <PSV:Moneda
                             t-att-tipoMoneda="record.currency_id.name"
-                            t-att-tipoCambio="record.currency_id.rate"
+                            t-att-tipoCambio="record.currency_id.inverse_rate"
                             t-attf-codigoImpuesto="1A"
                         />
                         <PSV:Proveedor

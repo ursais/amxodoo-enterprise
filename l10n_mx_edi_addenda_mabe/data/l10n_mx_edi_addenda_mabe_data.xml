@@ -9,6 +9,7 @@
                     <t t-schema-locations="http://recepcionfe.mabempresa.com/cfd/addenda/v1 http://recepcionfe.mabempresa.com/cfd/addenda/v1/mabev1.xsd"/>
                 </t>
                 <t t-xml-node="addenda" xmlns:mabe="http://recepcionfe.mabempresa.com/cfd/addenda/v1">
+                    <t t-namespace-key="mabe" t-namespace-url="http://recepcionfe.mabempresa.com/cfd/addenda/v1"/>
                     <mabe:Factura
                         version="1.0"
                         tipoDocumento="FACTURA"

@@ -4,10 +4,8 @@
         <field name="name">Addenda Whirlpool</field>
         <field name="arch" type="xml">
             <t>
-                <t t-xml-node="comprobante">
-                    <t t-namespace-key="detallista" t-namespace-url="http://www.sat.gob.mx/detallista"/>
-                </t>
                 <t t-xml-node="addenda" xmlns:detallista="http://www.sat.gob.mx/detallista">
+                    <t t-namespace-key="detallista" t-namespace-url="http://www.sat.gob.mx/detallista"/>
                     <detallista:detallista>
                         <detallista:orderIdentification>
                             <detallista:referenceIdentification
