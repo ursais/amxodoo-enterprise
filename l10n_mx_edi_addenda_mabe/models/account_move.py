@@ -21,7 +21,7 @@ class AccountMove(models.Model):
             "l10n_mx_edi_addenda_mabe.l10n_mx_edi_addenda_mabe",
             raise_if_not_found=False,
         )
-        official = addenda
+        official = addenda or self.env["l10n_mx_edi.addenda"]
         if addenda:
             official |= self.env["l10n_mx_edi.addenda"].search(
                 [("name", "=", addenda.name)]
