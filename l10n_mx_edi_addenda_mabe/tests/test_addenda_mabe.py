@@ -18,7 +18,17 @@ class TestAddendaMabe(AccountTestInvoicingCommon):
 
     def test_addenda_record_loaded(self):
         self.assertEqual(self.addenda.name, "Addenda Mabe")
-        self.assertIn("mabe", self.addenda.arch)
+        decoded = self.addenda._decode_single_addenda_arch()
+        self.assertNotIn("error", decoded)
+        self.assertNotIn("comprobante", decoded)
+        self.assertFalse(decoded["addenda"]["nsmap"])
+        arch = decoded["addenda"]["arch"]
+        self.assertIn(
+            'xmlns:mabe="http://recepcionfe.mabempresa.com/cfd/addenda/v1"',
+            arch,
+        )
+        self.assertIn("mabev1.xsd", arch)
+        self.assertIn("or 'NA'", arch)
 
     def test_mabe_flag_and_plant_code(self):
         partner = self.env["res.partner"].create(

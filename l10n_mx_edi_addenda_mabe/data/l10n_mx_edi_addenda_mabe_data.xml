@@ -4,13 +4,11 @@
         <field name="name">Addenda Mabe</field>
         <field name="arch" type="xml">
             <t>
-                <t t-xml-node="comprobante">
-                    <t t-namespace-key="mabe" t-namespace-url="http://recepcionfe.mabempresa.com/cfd/addenda/v1"/>
-                    <t t-schema-locations="http://recepcionfe.mabempresa.com/cfd/addenda/v1 http://recepcionfe.mabempresa.com/cfd/addenda/v1/mabev1.xsd"/>
-                </t>
-                <t t-xml-node="addenda" xmlns:mabe="http://recepcionfe.mabempresa.com/cfd/addenda/v1">
-                    <t t-namespace-key="mabe" t-namespace-url="http://recepcionfe.mabempresa.com/cfd/addenda/v1"/>
+                <t t-xml-node="addenda">
                     <mabe:Factura
+                        xmlns:mabe="http://recepcionfe.mabempresa.com/cfd/addenda/v1"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://recepcionfe.mabempresa.com/cfd/addenda/v1 http://recepcionfe.mabempresa.com/cfd/addenda/v1/mabev1.xsd"
                         version="1.0"
                         tipoDocumento="FACTURA"
                         t-att-folio="record.name"
@@ -21,20 +19,19 @@
                     >
                         <mabe:Moneda
                             t-att-tipoMoneda="record.currency_id.name"
-                            t-att-tipoCambio="0.00"
                             t-att-importeConLetra="record.mabe_amount_with_letter or 'NA'"
                         />
                         <mabe:Proveedor t-att-codigo="record.partner_id.ref or 'NA'" />
                         <mabe:Entrega
                             t-att-plantaEntrega="record.partner_shipping_id.mabe_plant_code"
                             t-att-calle="record.partner_shipping_id.street_name"
-                            t-att-noExterior="record.partner_shipping_id.street_number"
+                            t-att-noExterior="record.partner_shipping_id.street_number or 'NA'"
                             t-att-noInterior="record.partner_shipping_id.street_number2 or 'NA'"
                             t-att-codigoPostal="record.partner_shipping_id.zip"
                         />
                         <mabe:Detalles>
                             <t t-set="i" t-value="1" />
-                            <t t-foreach="record.invoice_line_ids" t-as="move_line">
+                            <t t-foreach="record.invoice_line_ids.filtered(lambda line: line.display_type == 'product')" t-as="move_line">
                                 <mabe:Detalle
                                     t-att-noLineaArticulo="i"
                                     t-att-codigoArticulo="move_line.product_id.default_code"
