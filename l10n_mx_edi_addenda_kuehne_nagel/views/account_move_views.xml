@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <field invisible="1" name="kn_flag" />
+                <field invisible="1" name="kn_flag" /> <!-- Shows the Kuehne+Nagel addenda page -->
                 <page
                     string="Kuehne+Nagel Addenda"
                     name="addenda_kuehne_nagel"
