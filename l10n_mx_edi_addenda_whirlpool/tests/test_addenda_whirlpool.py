@@ -18,8 +18,14 @@ class TestAddendaWhirlpool(BaseCommon):
 
     def test_addenda_record_loaded(self):
         self.assertEqual(self.addenda.name, "Addenda Whirlpool")
-        self.assertIn("detallista", self.addenda.arch)
-        self.assertIn("t-xml-node", self.addenda.arch)
+        decoded = self.addenda._decode_single_addenda_arch()
+        self.assertNotIn("error", decoded)
+        self.assertNotIn("comprobante", decoded)
+        self.assertFalse(decoded["addenda"]["nsmap"])
+        self.assertIn(
+            'xmlns:detallista="http://www.sat.gob.mx/detallista"',
+            decoded["addenda"]["arch"],
+        )
 
     def test_partner_can_assign_addenda(self):
         partner = self.env["res.partner"].create(

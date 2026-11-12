@@ -18,7 +18,14 @@ class TestAddendaAudi(AccountTestInvoicingCommon):
 
     def test_addenda_record_loaded(self):
         self.assertEqual(self.addenda.name, "Addenda Audi")
-        self.assertIn("Factura", self.addenda.arch)
+        decoded = self.addenda._decode_single_addenda_arch()
+        self.assertNotIn("error", decoded)
+        self.assertNotIn("comprobante", decoded)
+        self.assertFalse(decoded["addenda"]["nsmap"])
+        arch = decoded["addenda"]["arch"]
+        self.assertIn('xmlns:S="http://www.Audi.net.mx/Addenda/S"', arch)
+        self.assertIn("S.xsd", arch)
+        self.assertIn("display_type == 'product'", arch)
 
     def test_audi_flag_and_partner_selection(self):
         partner = self.env["res.partner"].create(

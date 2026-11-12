@@ -75,6 +75,13 @@ class TestKnAddenda(AccountTestInvoicingCommon):
 
     def test_addenda_record_loaded(self):
         self.assertEqual(self.addenda.name, "Addenda Kuehne Nagel")
+        decoded = self.addenda._decode_single_addenda_arch()
+        self.assertNotIn("error", decoded)
+        self.assertNotIn("comprobante", decoded)
+        self.assertFalse(decoded["addenda"]["nsmap"])
+        self.assertIn(
+            'xmlns:kn="http://www.w3.org/2001/XMLSchema"', decoded["addenda"]["arch"]
+        )
 
     def test_kn_flag_on_partner_with_addenda(self):
         invoice = self._create_invoice(self.partner_kn)

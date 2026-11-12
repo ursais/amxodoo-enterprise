@@ -4,9 +4,8 @@
         <field name="name">Addenda Kuehne Nagel</field>
         <field name="arch" type="xml">
             <t>
-                <t t-xml-node="addenda" xmlns:kn="http://www.w3.org/2001/XMLSchema">
-                    <t t-namespace-key="kn" t-namespace-url="http://www.w3.org/2001/XMLSchema"/>
-                    <kn:KNRECEPCION>
+                <t t-xml-node="addenda">
+                    <kn:KNRECEPCION xmlns:kn="http://www.w3.org/2001/XMLSchema">
                         <kn:Tipo>
                             <kn:FacturasKN>
                                 <kn:Purchase_Order t-out="record.ref or None" />

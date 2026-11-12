@@ -18,7 +18,13 @@ class TestAddendaFord(AccountTestInvoicingCommon):
 
     def test_addenda_record_loaded(self):
         self.assertEqual(self.addenda.name, "Addenda Ford")
-        self.assertIn("fomadd", self.addenda.arch)
+        decoded = self.addenda._decode_single_addenda_arch()
+        self.assertNotIn("error", decoded)
+        self.assertNotIn("comprobante", decoded)
+        self.assertFalse(decoded["addenda"]["nsmap"])
+        arch = decoded["addenda"]["arch"]
+        self.assertIn('xmlns:fomadd="http://www.ford.com.mx/cfdi/addenda"', arch)
+        self.assertIn("cfdiAddendaFord_1_0.xsd", arch)
 
     def test_ford_flag_when_addenda_assigned(self):
         partner = self.env["res.partner"].create(

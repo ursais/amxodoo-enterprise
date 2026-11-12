@@ -4,13 +4,11 @@
         <field name="name">Addenda Audi</field>
         <field name="arch" type="xml">
             <t>
-                <t t-xml-node="comprobante">
-                    <t t-namespace-key="S" t-namespace-url="http://www.Audi.net.mx/Addenda/S"/>
-                    <t t-schema-locations="http://www.Audi.net.mx/Addenda/S S.xsd"/>
-                </t>
-                <t t-xml-node="addenda" xmlns:S="http://www.Audi.net.mx/Addenda/S">
-                    <t t-namespace-key="S" t-namespace-url="http://www.Audi.net.mx/Addenda/S"/>
+                <t t-xml-node="addenda">
                     <S:Factura
+                        xmlns:S="http://www.Audi.net.mx/Addenda/S"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://www.Audi.net.mx/Addenda/S S.xsd"
                         t-att-codigoImpuesto="record.audi_tax_code"
                         t-att-tipoDocumentoFiscal="record.audi_fiscal_document_type"
                         version="1.0"
@@ -27,7 +25,7 @@
                         <S:Solicitante t-att-eMail="record.audi_applicant_email" />
                         <S:Partes>
                             <t t-set="i" t-value="1" />
-                            <t t-foreach="record.invoice_line_ids" t-as="move_line">
+                            <t t-foreach="record.invoice_line_ids.filtered(lambda line: line.display_type == 'product')" t-as="move_line">
                                 <S:Parte
                                     t-att-precioUnitario="move_line.price_unit"
                                     t-att-numeroParte="move_line.audi_product_ref"
@@ -38,9 +36,9 @@
                                     t-att-montoLinea="round(move_line.price_unit * move_line.quantity)"
                                     t-att-unidadMedida="move_line.product_uom_id.name"
                                 >
-                                    <t t-set="i" t-value="i + 1" />
                                     <S:Referencias t-att-ordenCompra="record.ref" />
                                 </S:Parte>
+                                <t t-set="i" t-value="i + 1" />
                             </t>
                         </S:Partes>
                     </S:Factura>
